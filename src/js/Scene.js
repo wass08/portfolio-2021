@@ -12,11 +12,6 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 
 import Stats from 'stats.js'
 import * as dat from 'dat.gui'
-console.log('three', THREE);
-
-
-const objects = {
-};
 
 class Scene {
   constructor() {
@@ -46,11 +41,8 @@ class Scene {
     dracoLoader.setDecoderPath('/draco/')
     this.gltfLoader.setDRACOLoader(dracoLoader)
 
-    // LOAD ALL OBJECTS CATALOG
-    const gltf = await this.gltfLoader.loadAsync('/models/Objects/objects.gltf');
-    gltf.scene.children.forEach(function (obj) {
-      objects[obj.name] = obj;
-    });
+    // LOAD OFFICE
+    const gltf = await this.gltfLoader.loadAsync('/models/Offices/office.gltf');
 
     const glassMaterial = new THREE.MeshBasicMaterial({
       color: 0xFFFFFF,
@@ -71,16 +63,15 @@ class Scene {
       }
     });
 
+    this.office = gltf.scene;
+
     // LOAD PLAYER ANIMATIONS
-    this.characterAnimations = (await this.gltfLoader.loadAsync('/models/Characters/character_animations.glb')).animations;
+    // this.characterAnimations = (await this.gltfLoader.loadAsync('/models/Characters/character_animations.glb')).animations;
     // LOAD PLAYER MESHES
     // boss_female_01 boss_male_01
-    this.playerMeshes = {
-      male_developer_02: (await this.gltfLoader.loadAsync('/models/Characters/male_developer_02.gltf')).scene.children[0],
-      female_developer_02: (await this.gltfLoader.loadAsync('/models/Characters/female_developer_02.gltf')).scene.children[0],
-      boss_female_01: (await this.gltfLoader.loadAsync('/models/Characters/boss_female_01.gltf')).scene.children[0],
-      boss_male_01: (await this.gltfLoader.loadAsync('/models/Characters/boss_male_01.gltf')).scene.children[0]
-    };
+    // this.playerMeshes = {
+    //   boss_male_01: (await this.gltfLoader.loadAsync('/models/Characters/boss_male_01.gltf')).scene.children[0]
+    // };
   }
 
   async buildScene() {
@@ -115,32 +106,58 @@ class Scene {
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.1)
     scene.add(ambientLight)
 
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.4)
+    directionalLight.position.set(2,5,2);
 
-
-
+    scene.add(directionalLight);
+    directionalLight.castShadow = true;
+    directionalLight.shadow.camera.near = -3;
+    directionalLight.shadow.camera.far = 8;
+    // directionalLight.shadow.camera.left = 1;
+    // directionalLight.shadow.camera.right = 10;
+    directionalLight.shadow.camera.top = 6;
+    directionalLight.shadow.camera.bottom = -6;
+    directionalLight.shadow.mapSize.width = 512
+    directionalLight.shadow.mapSize.height = 512
+    directionalLight.shadow.normalBias = 0.05
+    const directionalLightCameraHelper = new THREE.CameraHelper(directionalLight.shadow.camera)
+    // scene.add(directionalLightCameraHelper)
     /**
      * Char
      */
 
-    let wassim = this.playerMeshes.male_developer_02;
-    scene.add(wassim);
-    wassim.traverse((child) =>
-    {
-      if ( child.isMesh ) {
-        child.material.emissive =  child.material.color;
-        child.material.emissiveMap = child.material.map ;
-      }
+    // let wassim = this.playerMeshes.boss_male_01;
+    // scene.add(wassim);
+    // wassim.traverse((child) =>
+    // {
+    //   if ( child.isMesh ) {
+    //     child.material.emissive =  child.material.color;
+    //     child.material.emissiveMap = child.material.map ;
+    //   }
 
+    //   if(child instanceof THREE.Mesh)
+    //   {
+    //     child.castShadow = true
+    //     child.receiveShadow = false
+    //   }
+    // })
+
+    /*
+    ** Office
+    */
+
+    scene.add(this.office);
+    this.office.traverse((child) =>
+    {
       if(child instanceof THREE.Mesh)
       {
-        child.castShadow = true
-        child.receiveShadow = false
+        child.castShadow = true;
+        child.receiveShadow = true;
       }
     })
-
     /**
-         * Sizes
-         */
+     * Sizes
+     */
     const sizes = {
       width: window.innerWidth,
       height: window.innerHeight
@@ -171,12 +188,8 @@ class Scene {
      */
     // Base camera
     const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 1, 80)
-    this.cameraOffset = {
-      x: 6.2,
-      y: 9.2,
-      z: 6.2,
-    };
     scene.add(camera)
+    camera.position.set(2, 3, 2);
     this.cameraRotation = 0;
 
     /**
@@ -243,9 +256,6 @@ class Scene {
     controls.enablePan = true;
     controls.enableRotate = true;
     controls.enableZoom = true;
-    if (this.builderMode) {
-      controls.enabled = false;
-    }
     controls.maxDistance = 42;
     controls.minDistance = 6;
     controls.maxPolarAngle = Math.PI / 2;
@@ -279,7 +289,7 @@ class Scene {
     const mouseMove = (x, y) => {
       mouse.x = x / sizes.width * 2 - 1;
       mouse.y = - (y / sizes.height) * 2 + 1;
-      cursorMovement.style.transform = `translateX(${x}px) translateY(${y}px)`;
+      // cursorMovement.style.transform = `translateX(${x}px) translateY(${y}px)`;
     }
     console.log(renderer.domElement);
 
@@ -290,20 +300,14 @@ class Scene {
     const clock = new THREE.Clock()
     let previousTime = 0
     let cursorMovement = document.getElementById('cursorMovement');
-    let currentTarget;
-    let currentObjectTarget;
     const tick = () => {
       stats.begin()
       const elapsedTime = clock.getElapsedTime()
       const deltaTime = elapsedTime - previousTime
       previousTime = elapsedTime
 
-
-
-
       // Positions
       raycaster.setFromCamera(mouse, camera)
-
 
       // Update controls
       controls.update()
