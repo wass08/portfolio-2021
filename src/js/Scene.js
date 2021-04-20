@@ -141,7 +141,11 @@ class Scene {
     //     child.receiveShadow = false
     //   }
     // })
-
+    /**
+     * Labels
+     */
+     const raycaster = new THREE.Raycaster()
+     const points = []
     /*
     ** Office
     */
@@ -149,12 +153,32 @@ class Scene {
     scene.add(this.office);
     this.office.traverse((child) =>
     {
+      if (child.name == "SM_Prop_Certificate_01") {
+        points.push({
+          position: new THREE.Vector3(child.position.x + 0.1, child.position.y, child.position.z),
+          element: document.querySelector('.point-0')
+        });
+      }
+      if (child.name == "SM_Prop_Trophy_01") {
+        points.push({
+          position: new THREE.Vector3(child.position.x, child.position.y, child.position.z + 0.3),
+          element: document.querySelector('.point-1')
+        });
+      }
+      if (child.name == "SM_Prop_Computer_Setup_01") {
+        points.push({
+          position: new THREE.Vector3(child.position.x, child.position.y + 0.2, child.position.z - 0.5),
+          element: document.querySelector('.point-2')
+        });
+      }
       if(child instanceof THREE.Mesh)
       {
         child.castShadow = true;
         child.receiveShadow = true;
       }
     })
+
+    console.log(points[0]);
     /**
      * Sizes
      */
@@ -187,9 +211,9 @@ class Scene {
      * Camera
      */
     // Base camera
-    const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 1, 80)
+    const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 0.001, 80)
     scene.add(camera)
-    camera.position.set(2, 3, 2);
+    camera.position.set(2, 1.5, -2);
     this.cameraRotation = 0;
 
     /**
@@ -251,13 +275,13 @@ class Scene {
 
     // Controls
     const controls = new OrbitControls(camera, canvas)
-    controls.target.set(0, 0, 0);
+    controls.target.set(0, 1, 0);
     controls.enableDamping = true;
-    controls.enablePan = true;
+    controls.enablePan = false;
     controls.enableRotate = true;
     controls.enableZoom = true;
-    controls.maxDistance = 42;
-    controls.minDistance = 6;
+    controls.maxDistance = 2.5;
+    controls.minDistance = 0;
     controls.maxPolarAngle = Math.PI / 2;
     controls.minPolarAngle = 0;
     controls.keys = {
@@ -271,7 +295,6 @@ class Scene {
     ** User Click
     */
 
-    const raycaster = new THREE.Raycaster()
 
     const mouse = new THREE.Vector2()
 
@@ -306,11 +329,42 @@ class Scene {
       const deltaTime = elapsedTime - previousTime
       previousTime = elapsedTime
 
-      // Positions
-      raycaster.setFromCamera(mouse, camera)
 
       // Update controls
       controls.update()
+
+      // Go through each point
+      for(const point of points)
+      {
+        const screenPosition = point.position.clone()
+        screenPosition.project(camera)
+
+        const translateX = screenPosition.x * sizes.width * 0.5
+        const translateY = - screenPosition.y * sizes.height * 0.5
+        point.element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)`
+
+        raycaster.setFromCamera(screenPosition, camera)
+        const intersects = raycaster.intersectObjects(scene.children, true)
+
+        if(intersects.length === 0)
+        {
+            point.element.classList.add('visible')
+        }
+        else
+        {
+            const intersectionDistance = intersects[0].distance
+            const pointDistance = point.position.distanceTo(camera.position)
+
+            if(intersectionDistance < pointDistance)
+            {
+                point.element.classList.remove('visible')
+            }
+            else
+            {
+                point.element.classList.add('visible')
+            }
+        }
+      }
 
       // Render
       // renderer.render(scene, camera)
