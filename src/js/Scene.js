@@ -144,8 +144,25 @@ class Scene {
     /**
      * Labels
      */
-     const raycaster = new THREE.Raycaster()
-     const points = []
+     const raycaster = new THREE.Raycaster();
+     const points = {
+      'SM_Prop_Certificate_01' : {
+        offset: new THREE.Vector3(0.1, 0, 0),
+        element: document.querySelector('.point__education'),
+      },
+      'SM_Prop_Trophy_01' : {
+        offset: new THREE.Vector3(0, 0, 0.3),
+        element: document.querySelector('.point__achievements'),
+      },
+      'SM_Prop_Computer_Setup_01' : {
+        offset: new THREE.Vector3(0, 0.2, -0.5),
+        element: document.querySelector('.point__experiences'),
+      },
+      'SM_Prop_Book_Group_02' : {
+        offset: new THREE.Vector3(0, 0, 0.3),
+        element: document.querySelector('.point__skills'),
+      }
+     };
     /*
     ** Office
     */
@@ -153,23 +170,13 @@ class Scene {
     scene.add(this.office);
     this.office.traverse((child) =>
     {
-      if (child.name == "SM_Prop_Certificate_01") {
-        points.push({
-          position: new THREE.Vector3(child.position.x + 0.1, child.position.y, child.position.z),
-          element: document.querySelector('.point-0')
-        });
-      }
-      if (child.name == "SM_Prop_Trophy_01") {
-        points.push({
-          position: new THREE.Vector3(child.position.x, child.position.y, child.position.z + 0.3),
-          element: document.querySelector('.point-1')
-        });
-      }
-      if (child.name == "SM_Prop_Computer_Setup_01") {
-        points.push({
-          position: new THREE.Vector3(child.position.x, child.position.y + 0.2, child.position.z - 0.5),
-          element: document.querySelector('.point-2')
-        });
+      const point = points[child.name];
+      if (point) {
+        point.position = new THREE.Vector3(
+          child.position.x + point.offset.x, 
+          child.position.y + point.offset.y, 
+          child.position.z + point.offset.z
+        );
       }
       if(child instanceof THREE.Mesh)
       {
@@ -178,7 +185,6 @@ class Scene {
       }
     })
 
-    console.log(points[0]);
     /**
      * Sizes
      */
@@ -211,8 +217,8 @@ class Scene {
      * Camera
      */
     // Base camera
-    const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 0.001, 80)
-    scene.add(camera)
+    const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 0.001, 80);
+    scene.add(camera);
     camera.position.set(2, 1.5, -2);
     this.cameraRotation = 0;
 
@@ -226,25 +232,24 @@ class Scene {
       powerPreference: 'high-performance',
     })
     renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFShadowMap
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-    renderer.setSize(sizes.width, sizes.height)
+    renderer.shadowMap.type = THREE.PCFShadowMap;
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(sizes.width, sizes.height);
     renderer.outputEncoding = THREE.sRGBEncoding;
     renderer.setClearColor(0xFFFFFF, 1);
-    renderer.toneMapping = THREE.ACESFilmicToneMapping
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.3;
 
 
-    let RenderTargetClass = null
-
+    let RenderTargetClass = null;
 
     if (renderer.getPixelRatio() === 1 && renderer.capabilities.isWebGL2) {
-      RenderTargetClass = THREE.WebGLMultisampleRenderTarget
-      console.log('Using WebGLMultisampleRenderTarget')
+      RenderTargetClass = THREE.WebGLMultisampleRenderTarget;
+      console.log('Using WebGLMultisampleRenderTarget');
     }
     else {
-      RenderTargetClass = THREE.WebGLRenderTarget
-      console.log('Using WebGLRenderTarget')
+      RenderTargetClass = THREE.WebGLRenderTarget;
+      console.log('Using WebGLRenderTarget');
     }
 
     const renderTarget = new RenderTargetClass(
@@ -256,25 +261,26 @@ class Scene {
         format: THREE.RGBAFormat,
         encoding: THREE.sRGBEncoding
       }
-    )
-    const effectComposer = new EffectComposer(renderer, renderTarget)
-    effectComposer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-    effectComposer.setSize(sizes.width, sizes.height)
+    );
+
+    const effectComposer = new EffectComposer(renderer, renderTarget);
+    effectComposer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    effectComposer.setSize(sizes.width, sizes.height);
     console.log(effectComposer);
-    const renderPass = new RenderPass(scene, camera)
-    effectComposer.addPass(renderPass)
+    const renderPass = new RenderPass(scene, camera);
+    effectComposer.addPass(renderPass);
 
     if (renderer.getPixelRatio() === 1 && !renderer.capabilities.isWebGL2) {
-      const smaaPass = new SMAAPass()
-      effectComposer.addPass(smaaPass)
+      const smaaPass = new SMAAPass();
+      effectComposer.addPass(smaaPass);
 
-      console.log('Using SMAA')
+      console.log('Using SMAA');
     }
 
 
 
     // Controls
-    const controls = new OrbitControls(camera, canvas)
+    const controls = new OrbitControls(camera, canvas);
     controls.target.set(0, 1, 0);
     controls.enableDamping = true;
     controls.enablePan = false;
@@ -284,6 +290,7 @@ class Scene {
     controls.minDistance = 0;
     controls.maxPolarAngle = Math.PI / 2;
     controls.minPolarAngle = 0;
+
     controls.keys = {
       LEFT: 37, //left arrow
       UP: 38, // up arrow
@@ -295,97 +302,87 @@ class Scene {
     ** User Click
     */
 
-
-    const mouse = new THREE.Vector2()
+    const mouse = new THREE.Vector2();
 
     renderer.domElement.addEventListener('mousemove', (event) => {
-      mouseMove(event.clientX, event.clientY)
-    })
+      mouseMove(event.clientX, event.clientY);
+    });
+
     renderer.domElement.addEventListener('pointerdown', (event) => {
 
-    })
+    });
 
     renderer.domElement.addEventListener('touchstart', (event) => {
 
-    })
+    });
 
     const mouseMove = (x, y) => {
       mouse.x = x / sizes.width * 2 - 1;
       mouse.y = - (y / sizes.height) * 2 + 1;
       // cursorMovement.style.transform = `translateX(${x}px) translateY(${y}px)`;
     }
-    console.log(renderer.domElement);
-
 
     /**
      * Animate
      */
-    const clock = new THREE.Clock()
-    let previousTime = 0
+    const clock = new THREE.Clock();
+    let previousTime = 0;
     let cursorMovement = document.getElementById('cursorMovement');
     const tick = () => {
-      stats.begin()
-      const elapsedTime = clock.getElapsedTime()
-      const deltaTime = elapsedTime - previousTime
-      previousTime = elapsedTime
+      stats.begin();
+      const elapsedTime = clock.getElapsedTime();
+      const deltaTime = elapsedTime - previousTime;
+      previousTime = elapsedTime;
 
 
       // Update controls
-      controls.update()
+      controls.update();
 
       // Go through each point
-      for(const point of points)
+      for(const key in points)
       {
-        const screenPosition = point.position.clone()
-        screenPosition.project(camera)
+        const point = points[key];
+        const screenPosition = point.position.clone();
+        screenPosition.project(camera);
 
-        const translateX = screenPosition.x * sizes.width * 0.5
-        const translateY = - screenPosition.y * sizes.height * 0.5
-        point.element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)`
+        const translateX = screenPosition.x * sizes.width * 0.5;
+        const translateY = - screenPosition.y * sizes.height * 0.5;
+        point.element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)`;
 
-        raycaster.setFromCamera(screenPosition, camera)
-        const intersects = raycaster.intersectObjects(scene.children, true)
+        raycaster.setFromCamera(screenPosition, camera);
+        const intersects = raycaster.intersectObjects(scene.children, true);
 
         if(intersects.length === 0)
         {
-            point.element.classList.add('visible')
+          point.element.classList.add('visible');
         }
         else
         {
-            const intersectionDistance = intersects[0].distance
-            const pointDistance = point.position.distanceTo(camera.position)
+          const intersectionDistance = intersects[0].distance;
+          const pointDistance = point.position.distanceTo(camera.position);
 
-            if(intersectionDistance < pointDistance)
-            {
-                point.element.classList.remove('visible')
-            }
-            else
-            {
-                point.element.classList.add('visible')
-            }
+          if(intersectionDistance < pointDistance)
+          {
+            point.element.classList.remove('visible');
+          }
+          else
+          {
+            point.element.classList.add('visible')
+          }
         }
       }
 
       // Render
       // renderer.render(scene, camera)
-      effectComposer.render()
+      effectComposer.render();
 
-      stats.end()
+      stats.end();
       // Call tick again on the next frame
-      window.requestAnimationFrame(tick)
+      window.requestAnimationFrame(tick);
     }
 
-    tick()
+    tick();
     console.log(renderer.info);
-  }
-
-  unload() {
-    if (this.stats) {
-      this.stats.dom.remove();
-    }
-    if (this.gui) {
-      this.gui.domElement.remove();
-    }
   }
 }
 
