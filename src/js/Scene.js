@@ -1,6 +1,5 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import { BufferGeometryUtils } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js'
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
@@ -148,19 +147,19 @@ class Scene {
      const points = {
       'SM_Prop_Certificate_01' : {
         offset: new THREE.Vector3(0.1, 0, 0),
-        element: document.querySelector('.point__education'),
+        element: document.querySelector('.point--education'),
       },
       'SM_Prop_Trophy_01' : {
         offset: new THREE.Vector3(0, 0, 0.3),
-        element: document.querySelector('.point__achievements'),
+        element: document.querySelector('.point--achievements'),
       },
       'SM_Prop_Computer_Setup_01' : {
         offset: new THREE.Vector3(0, 0.2, -0.5),
-        element: document.querySelector('.point__experiences'),
+        element: document.querySelector('.point--experiences'),
       },
       'SM_Prop_Book_Group_02' : {
         offset: new THREE.Vector3(0, 0, 0.3),
-        element: document.querySelector('.point__skills'),
+        element: document.querySelector('.point--skills'),
       }
      };
     /*
@@ -280,8 +279,9 @@ class Scene {
 
 
     // Controls
+    const defaultControlsPosition = new THREE.Vector3(0, 1, 0);
     const controls = new OrbitControls(camera, canvas);
-    controls.target.set(0, 1, 0);
+    controls.target.set(defaultControlsPosition.x, defaultControlsPosition.y, defaultControlsPosition.z);
     controls.enableDamping = true;
     controls.enablePan = false;
     controls.enableRotate = true;
@@ -302,14 +302,33 @@ class Scene {
     ** User Click
     */
 
+    const camToSave = {};
+    let targetPosition;
     const mouse = new THREE.Vector2();
 
+    for(const key in points)
+    {
+      const point = points[key];
+      point.element.addEventListener('pointerdown', (event) => {
+        targetPosition = point.position;
+        camToSave.position = camera.position.clone();
+        camToSave.quaternion = camera.quaternion.clone();
+        camToSave.controlTarget = controls.target.clone();
+        document.body.classList.add("details")
+      });
+    }
+    
+    document.querySelector('.details__back').addEventListener('pointerdown', (event) => {
+      targetPosition = null;
+      camToSave.resetPosition = true;
+      document.body.classList.remove("details")
+    });
     renderer.domElement.addEventListener('mousemove', (event) => {
       mouseMove(event.clientX, event.clientY);
     });
 
     renderer.domElement.addEventListener('pointerdown', (event) => {
-
+      console.log('oh');
     });
 
     renderer.domElement.addEventListener('touchstart', (event) => {
@@ -336,6 +355,18 @@ class Scene {
 
 
       // Update controls
+      if (targetPosition) {
+        controls.target.lerp(targetPosition, 0.06);
+      } else {
+        if (camToSave.resetPosition) {
+          camera.position.lerp(camToSave.position, 0.12);
+          camera.quaternion.slerp(camToSave.quaternion, 0.12);
+          controls.target.lerp(camToSave.controlTarget, 0.12);
+          if (camera.position.distanceTo(camToSave.position) < 0.01) {
+            camToSave.resetPosition = false;
+          }
+        }
+      }
       controls.update();
 
       // Go through each point
@@ -348,10 +379,17 @@ class Scene {
         const translateX = screenPosition.x * sizes.width * 0.5;
         const translateY = - screenPosition.y * sizes.height * 0.5;
         point.element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)`;
+        
+        // Check if point is visible before raycasting
+        let frustum = new THREE.Frustum();
+        frustum.setFromProjectionMatrix( new THREE.Matrix4().multiplyMatrices( camera.projectionMatrix, camera.matrixWorldInverse ) );
+        if (!frustum.containsPoint(point.position)) {
+          point.element.classList.remove('visible');
+          continue ;
+        }
 
         raycaster.setFromCamera(screenPosition, camera);
         const intersects = raycaster.intersectObjects(scene.children, true);
-
         if(intersects.length === 0)
         {
           point.element.classList.add('visible');
@@ -360,7 +398,6 @@ class Scene {
         {
           const intersectionDistance = intersects[0].distance;
           const pointDistance = point.position.distanceTo(camera.position);
-
           if(intersectionDistance < pointDistance)
           {
             point.element.classList.remove('visible');

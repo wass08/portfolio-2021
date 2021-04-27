@@ -1,12 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Prata&display=swap');
+
+
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 html, body {
   height: 100%;
   overflow: hidden;
 }
+
+body {
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  line-height: 150%;
+  font-size: 18px;
+ }
+ 
+ h1, h2, h3, h4, h5, h6 {
+  line-height: 100%;
+  font-family: 'Prata', serif;
+ }
 
 canvas.webgl {
   position: fixed;
@@ -16,58 +32,130 @@ canvas.webgl {
   height: 100%;
 }
 
+/*
+** POINTS
+*/
+
 .point
 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }
 
-.point .label
-{
-    position: absolute;
-    top: -20px;
-    left: -20px;
-    padding:12px;
-    border-radius: 4px;
-    background: #00000077;
-    color: #ffffff;
-    font-weight: bold;
-    font-family: Helvetica, Arial, sans-serif;
-    text-align: center;
-    font-size: 14px;
-    cursor: help;
-    transform: scale(0, 0);
-    transition: transform 0.3s;
-}
-
-.point.visible .label
-{
-    transform: scale(1, 1);
-}
-
-
-.point .text
+.point__label
 {
   position: absolute;
-  top: 30px;
-  left: -120px;
-  width: 200px;
-  padding: 20px;
+  top: -50px;
+  left: -21px;
+  padding:8px 16px;
   border-radius: 4px;
-  background: #00000077;
-  border: 1px solid #ffffff77;
-  color: #ffffff;
-  line-height: 1.3em;
-  font-family: Helvetica, Arial, sans-serif;
-  font-weight: 100;
-  font-size: 14px;
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
+  background-color: rgba(255, 255, 255, .55);  
+  backdrop-filter: blur(5px);
+  color: black;
+  font-family: 'Prata';
+  font-weight: bold;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  transform: scale(0, 0);
+  transition: transform 0.3s;
 }
+
+.point.visible .point__label
+{
+  transform: scale(1, 1);
+}
+
+
 
 .point:hover .text
 {
     opacity: 1;
+}
+
+/*
+** DETAILS
+*/
+body:not(.details) .details {
+  display: none;
+}
+
+.details {
+  position: fixed;
+  z-index: 42;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding:32px;
+  flex-direction: column;
+}
+
+.details__back {
+  font-family: 'Prata';
+  font-weight: 700;
+  padding: 8px 16px;
+  border: solid 1px black;
+  margin-top: 16px;
+  background: rgba(255,255,255,0.85);
+  transition: all .4s;
+}
+
+.details__back:hover {
+  cursor: pointer;
+  color:white;
+  background: rgba(0, 0, 0, 0.85);
+}
+
+/*
+** SCREEN
+*/
+
+.screen {
+  background-color: rgba(255, 255, 255, .85);  
+  backdrop-filter: blur(5px);
+  border-radius: 4px;
+  width: 620px;
+  max-width: 100%;
+  padding:32px;
+  max-height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.screen__title {
+  font-size: 36px;
+}
+
+.screen__content {
+  overflow-y: auto;
+}
+
+/*
+** EDUCATION
+*/
+
+.education {
+  margin-top:24px;
+}
+
+.education__title {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.education__content {
+  margin-top:8px;
+}
+
+.education__content ul {
+  padding: 0;
+  margin-top: 16px;
+  padding-left: 19px;
 }
