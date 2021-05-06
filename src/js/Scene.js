@@ -148,18 +148,32 @@ class Scene {
       'SM_Prop_Certificate_01' : {
         offset: new THREE.Vector3(0.1, 0, 0),
         element: document.querySelector('.point--education'),
+        details: document.querySelector('.screen--education'),
+      },
+      'SM_Prop_CorkBoard_01' : {
+        offset: new THREE.Vector3(-0.4, 0.1, 0.3),
+        element: document.querySelector('.point--activities'),
+        details: document.querySelector('.screen--activities'),
       },
       'SM_Prop_Trophy_01' : {
         offset: new THREE.Vector3(0, 0, 0.3),
         element: document.querySelector('.point--achievements'),
+        details: document.querySelector('.screen--achievements'),
       },
       'SM_Prop_Computer_Setup_01' : {
-        offset: new THREE.Vector3(0, 0.2, -0.5),
-        element: document.querySelector('.point--experiences'),
+        offset: new THREE.Vector3(0, 0.2, 0.5),
+        element: document.querySelector('.point--about'),
+        details: document.querySelector('.screen--about'),
+      },
+      'SM_Prop_Phone_Desk_01' : {
+        offset: new THREE.Vector3(0, 0.27, 0),
+        element: document.querySelector('.point--contact'),
+        details: document.querySelector('.screen--contact'),
       },
       'SM_Prop_Book_Group_02' : {
         offset: new THREE.Vector3(0, 0, 0.3),
         element: document.querySelector('.point--skills'),
+        details: document.querySelector('.screen--skills'),
       }
      };
     /*
@@ -303,25 +317,27 @@ class Scene {
     */
 
     const camToSave = {};
-    let targetPosition;
+    let currentPoint;
     const mouse = new THREE.Vector2();
 
     for(const key in points)
     {
       const point = points[key];
       point.element.addEventListener('pointerdown', (event) => {
-        targetPosition = point.position;
+        currentPoint = point;
         camToSave.position = camera.position.clone();
         camToSave.quaternion = camera.quaternion.clone();
         camToSave.controlTarget = controls.target.clone();
         document.body.classList.add("details")
+        point.details.classList.add("visible");
       });
     }
     
     document.querySelector('.details__back').addEventListener('pointerdown', (event) => {
-      targetPosition = null;
       camToSave.resetPosition = true;
-      document.body.classList.remove("details")
+      document.body.classList.remove("details");
+      currentPoint.details.classList.remove("visible");
+      currentPoint = null;
     });
     renderer.domElement.addEventListener('mousemove', (event) => {
       mouseMove(event.clientX, event.clientY);
@@ -355,8 +371,8 @@ class Scene {
 
 
       // Update controls
-      if (targetPosition) {
-        controls.target.lerp(targetPosition, 0.06);
+      if (currentPoint) {
+        controls.target.lerp(currentPoint.position, 0.06);
       } else {
         if (camToSave.resetPosition) {
           camera.position.lerp(camToSave.position, 0.12);

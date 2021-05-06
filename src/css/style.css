@@ -50,16 +50,29 @@ canvas.webgl {
   left: -21px;
   padding:8px 16px;
   border-radius: 4px;
-  background-color: rgba(255, 255, 255, .55);  
+  background-color: rgba(255, 255, 255, .65);  
   backdrop-filter: blur(5px);
   color: black;
   font-family: 'Prata';
   font-weight: bold;
   text-align: center;
-  font-size: 16px;
+  font-size: 20px;
   cursor: pointer;
   transform: scale(0, 0);
   transition: transform 0.3s;
+}
+
+.point__label::before {
+  content: '';
+  position: absolute;
+  background: #ffa50080;
+  top: 59%;
+  left: 50%;
+  width: 80%;
+  height: 12px;
+  z-index: -1;
+  transform: rotate(-5deg) translateX(-50%) translateY(-50%);
+  backdrop-filter: blur(5px);
 }
 
 .point.visible .point__label
@@ -99,9 +112,11 @@ body:not(.details) .details {
   font-family: 'Prata';
   font-weight: 700;
   padding: 8px 16px;
-  border: solid 1px black;
   margin-top: 16px;
-  background: rgba(255,255,255,0.85);
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, .65);
+  backdrop-filter: blur(5px);
+  color: black;
   transition: all .4s;
 }
 
@@ -135,6 +150,11 @@ body:not(.details) .details {
 
 .screen__content {
   overflow-y: auto;
+  padding: 16px 0;
+}
+
+.screen:not(.visible) {
+  display:none;
 }
 
 /*
