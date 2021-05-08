@@ -8,6 +8,8 @@ import { SMAAPass } from 'three/examples/jsm/postprocessing/SMAAPass.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 
+import gsap from 'gsap'
+
 
 import Stats from 'stats.js'
 import * as dat from 'dat.gui'
@@ -18,24 +20,43 @@ class Scene {
   }
 
   async setup() {
-    console.log('setup...');
+    const loadingScreenTitleLoader = document.querySelector(".loading-screen__title--loader");
+    this.loadingManager = new THREE.LoadingManager(
+        // Loaded
+        () =>
+        {
+          console.log('loaded');
+        },
+
+        // Progress
+        (itemUrl, itemsLoaded, itemsTotal) =>
+        {
+            const progressRatio = itemsLoaded / itemsTotal * 100;
+            console.log(itemsLoaded, itemsTotal, progressRatio)
+            loadingScreenTitleLoader.style.width = `${progressRatio}%`;
+        }
+    );
     await this.loadResources();
     console.log('resources loaded');
     await this.buildScene();
+    
+    setTimeout(() => {
+      document.body.classList.add("loaded");
+    }, 1000);
   }
 
   async loadResources() {
     /**
      * Fonts
      */
-    const fontLoader = new THREE.FontLoader()
+    const fontLoader = new THREE.FontLoader(this.loadingManager)
 
     this.font = await fontLoader.loadAsync('/fonts/Poppins SemiBold_Regular.json');
 
     /**
     * Models
     */
-    this.gltfLoader = new GLTFLoader()
+    this.gltfLoader = new GLTFLoader(this.loadingManager)
     const dracoLoader = new DRACOLoader();
     dracoLoader.setDecoderPath('/draco/')
     this.gltfLoader.setDRACOLoader(dracoLoader)
@@ -74,12 +95,10 @@ class Scene {
   }
 
   async buildScene() {
-    const self = this;
 
     // Debug
     const gui = new dat.GUI()
     this.gui = gui;
-    window.gui = gui;
     //gui.hide();
 
     const stats = new Stats()
@@ -151,7 +170,7 @@ class Scene {
         details: document.querySelector('.screen--education'),
       },
       'SM_Prop_CorkBoard_01' : {
-        offset: new THREE.Vector3(-0.4, 0.1, 0.3),
+        offset: new THREE.Vector3(-0.4, 0.3, 0.3),
         element: document.querySelector('.point--activities'),
         details: document.querySelector('.screen--activities'),
       },
@@ -233,7 +252,9 @@ class Scene {
     const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 0.001, 80);
     scene.add(camera);
     camera.position.set(2, 1.5, -2);
+    
     this.cameraRotation = 0;
+
 
     /**
      * Renderer
@@ -305,12 +326,25 @@ class Scene {
     controls.maxPolarAngle = Math.PI / 2;
     controls.minPolarAngle = 0;
 
+
     controls.keys = {
       LEFT: 37, //left arrow
       UP: 38, // up arrow
       RIGHT: 39, // right arrow
       BOTTOM: 40 // down arrow
     }
+
+    
+    gsap.to(camera.position, {
+			duration: 4,
+			x: -1.8,
+			y: 1.3,
+			z: 1.1,
+      delay: 2.4,
+			onUpdate: function() {
+        controls.target.set(defaultControlsPosition.x, defaultControlsPosition.y, defaultControlsPosition.z);
+			}
+		});
 
     /*
     ** User Click
@@ -327,9 +361,21 @@ class Scene {
         currentPoint = point;
         camToSave.position = camera.position.clone();
         camToSave.quaternion = camera.quaternion.clone();
-        camToSave.controlTarget = controls.target.clone();
-        document.body.classList.add("details")
-        point.details.classList.add("visible");
+        let triggeredVisibilityDetails = false;
+        let tween = gsap.to(controls.target, {
+          duration: 1.2,
+          x: point.position.x,
+          y: point.position.y,
+          z: point.position.z,
+          delay: 0,
+          onUpdate: () => {
+            if (!triggeredVisibilityDetails && tween.progress() > 0.5) {
+              triggeredVisibilityDetails = true;
+              document.body.classList.add("details")
+              point.details.classList.add("visible");
+            }
+          }
+        });
       });
     }
     
@@ -338,6 +384,24 @@ class Scene {
       document.body.classList.remove("details");
       currentPoint.details.classList.remove("visible");
       currentPoint = null;
+      gsap.to(controls.target, {
+        duration: 1.2,
+        x: defaultControlsPosition.x,
+        y: defaultControlsPosition.y,
+        z: defaultControlsPosition.z,
+        delay: 0,
+        onComplete: function() {
+        }
+      });
+      gsap.to(camera.position, {
+        duration: 1.2,
+        x: camToSave.position.x,
+        y: camToSave.position.y,
+        z: camToSave.position.z,
+        delay: 0,
+        onUpdate: function() {
+        }
+      });
     });
     renderer.domElement.addEventListener('mousemove', (event) => {
       mouseMove(event.clientX, event.clientY);
@@ -371,18 +435,18 @@ class Scene {
 
 
       // Update controls
-      if (currentPoint) {
-        controls.target.lerp(currentPoint.position, 0.06);
-      } else {
-        if (camToSave.resetPosition) {
-          camera.position.lerp(camToSave.position, 0.12);
-          camera.quaternion.slerp(camToSave.quaternion, 0.12);
-          controls.target.lerp(camToSave.controlTarget, 0.12);
-          if (camera.position.distanceTo(camToSave.position) < 0.01) {
-            camToSave.resetPosition = false;
-          }
-        }
-      }
+      // if (currentPoint) {
+      //   controls.target.lerp(currentPoint.position, 0.06);
+      // } else {
+      //   if (camToSave.resetPosition) {
+      //     camera.position.lerp(camToSave.position, 0.12);
+      //     camera.quaternion.slerp(camToSave.quaternion, 0.12);
+      //     controls.target.lerp(camToSave.controlTarget, 0.12);
+      //     if (camera.position.distanceTo(camToSave.position) < 0.01) {
+      //       camToSave.resetPosition = false;
+      //     }
+      //   }
+      // }
       controls.update();
 
       // Go through each point
