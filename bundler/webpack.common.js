@@ -32,7 +32,7 @@ module.exports = {
     {
         rules:
         [
-                        // HTML
+            // HTML
             {
                 test: /\.(html)$/,
                 use: ['html-loader'],

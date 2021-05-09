@@ -64,21 +64,35 @@ class Scene {
     // LOAD OFFICE
     const gltf = await this.gltfLoader.loadAsync('/models/Offices/office.gltf');
 
+    // SETUP GLASS MATERIAL
     const glassMaterial = new THREE.MeshBasicMaterial({
       color: 0xFFFFFF,
       opacity: 0.5,
       transparent: true,
     });
+
+    // SETUP VIDEO TEXTURE
+    const video = document.createElement('video');
+    video.setAttribute('crossorigin', 'anonymous');
+    video.src = "https://player.vimeo.com/external/538877060.hd.mp4?s=4042b4dc217598f5ce7c4cf8b8c3787b42218ea3&profile_id=175";
+    // video.src = "https://cf.appdrag.com/wassimdemo/asset/WIN_20210509_13_19_28_Pro.mp4";
+    video.load();
+    window.video = video;
+    const videoTexture = new THREE.VideoTexture(video);
+    videoTexture.wrapT = THREE.RepeatWrapping;
+    videoTexture.repeat.y = - 1;
+    const videoMaterial =  new THREE.MeshBasicMaterial( {map: videoTexture, side: THREE.FrontSide, toneMapped: false} );
+
+    // SETUP CUSTOM MATERIALS
     gltf.scene.traverse((child) => {
       if (child.isMesh) {
-        // Convert standard material to phong
-        // let prevMaterial = child.material;
-        // child.material = new THREE.MeshPhongMaterial();
-        // THREE.MeshBasicMaterial.prototype.copy.call( child.material, prevMaterial );
         child.material.emissive = child.material.color;
         child.material.emissiveMap = child.material.map;
         if (child.material && child.material.name == 'A_Glass') {
           child.material = glassMaterial;
+        }
+        if (child.material.name == 'ScreenComputer') {
+          child.material = videoMaterial;
         }
       }
     });
@@ -265,7 +279,7 @@ class Scene {
       precision: "mediump",
       powerPreference: 'high-performance',
     })
-    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.enabled = false;
     renderer.shadowMap.type = THREE.PCFShadowMap;
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(sizes.width, sizes.height);

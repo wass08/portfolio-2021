@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Catamaran:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&family=Catamaran:wght@800&display=swap');
 
 
 * {
@@ -13,10 +13,11 @@ html, body {
 }
 
 body {
-  font-family: 'Lato', sans-serif;
-  font-weight: 300;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  color:#666666;
   line-height: 150%;
-  font-size: 18px;
+  font-size: 16px;
  }
  
  h1, h2, h3, h4, h5, h6 {
@@ -144,8 +145,6 @@ body.loaded .loading-screen {
   transform: scale(1, 1);
 }
 
-
-
 .point:hover .text
 {
     opacity: 1;
@@ -209,6 +208,7 @@ body:not(.details) .details {
 
 .screen__title {
   font-size: 36px;
+  color:black;
 }
 
 .screen__content {
@@ -241,4 +241,27 @@ body:not(.details) .details {
   padding: 0;
   margin-top: 16px;
   padding-left: 19px;
+}
+
+/*
+** ACTIVITIES
+*/
+
+.activity {
+  margin: 16px 0;
+}
+
+.activity__title {
+  font-size: 18px;
+  color: black;
+  font-family: 'Catamaran';
+  font-weight: 700;
+}
+
+.activity__position {
+  color:#9b9b9b;
+}
+
+.activity__date {
+
 }
