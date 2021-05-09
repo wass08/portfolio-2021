@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&family=Catamaran:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Catamaran:wght@800&display=swap');
 
 
 * {
@@ -34,6 +34,21 @@ canvas.webgl {
   height: 100%;
 }
 
+a {
+  font-weight: bold;
+  color:black;
+  text-decoration: none;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
 
 /*
 ** LOADING SCREEN
@@ -54,16 +69,36 @@ canvas.webgl {
   transition: opacity 2.4s ease-in;
 }
 
-body.loaded .loading-screen {
+body.started .loading-screen {
   opacity: 0;
   pointer-events: none;
 }
-
 
 .loading-screen__title {
   font-size: 84px;
   color: #cecece;
   position: relative;
+}
+
+
+body:not(.loaded) .loading-screen__button {
+  opacity: 0;
+}
+
+.loading-screen__button {
+  margin-top: 16px;
+  padding: 12px 32px;
+  border: solid 2px #666666;
+  transition: all .4s;
+  font-family: 'Catamaran';
+  color: #666666;
+}
+
+.loading-screen__button:hover {
+  background:black;
+  color:white;
+  cursor:pointer;
+  border-color: black;
 }
 
 @media (max-width:789px) {
@@ -230,7 +265,14 @@ body:not(.details) .details {
 
 .education__title {
   font-size: 18px;
-  font-weight: 400;
+  font-weight: 700;
+  font-family: 'Catamaran';
+  color: black;
+}
+
+.education__subtitle {
+  margin-bottom: 8px;
+  color:#9B9B9B;
 }
 
 .education__content {
@@ -248,7 +290,7 @@ body:not(.details) .details {
 */
 
 .activity {
-  margin: 16px 0;
+  margin: 24px 0;
 }
 
 .activity__title {
@@ -259,9 +301,85 @@ body:not(.details) .details {
 }
 
 .activity__position {
-  color:#9b9b9b;
+  color:#666;
 }
 
-.activity__date {
+/*
+** DATES
+*/
 
+.date {
+  display: flex;
+  align-items: center;
+}
+
+.date svg {
+  width:14px;
+}
+
+.date svg polygon {
+  fill:#ececec;
+}
+
+.date__from, .date__to {
+  padding: 2px 12px;
+  background: #ececec;
+  color: black;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.date__from {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.date__to {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.date__to-icon {
+  margin-left:-4px;
+}
+
+/*
+** Skills
+*/
+
+.skill-category {
+  margin:24px 0;
+}
+
+.skill-category__title {
+  font-size: 18px;
+  color: black;
+  font-family: 'Catamaran';
+  font-weight: 700;
+}
+
+.skill-category__content {
+  color:#666;
+}
+
+/*
+** Achievements
+*/
+
+.achievements li {
+  margin: 8px 0;
+}
+
+/*
+** Contact
+*/
+
+.contact {
+  display:flex;
+  align-items: center;
+  gap:16px;
+}
+
+.contact svg {
+  width:32px;
 }

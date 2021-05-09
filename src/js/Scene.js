@@ -13,6 +13,7 @@ import gsap from 'gsap'
 
 import Stats from 'stats.js'
 import * as dat from 'dat.gui'
+import { TetrahedronGeometry } from 'three'
 
 class Scene {
   constructor() {
@@ -38,11 +39,20 @@ class Scene {
     );
     await this.loadResources();
     console.log('resources loaded');
-    await this.buildScene();
+    // await this.buildScene();
     
     setTimeout(() => {
       document.body.classList.add("loaded");
     }, 1000);
+
+    const that = this;
+    document.querySelector('.loading-screen__button').onclick = () => {
+      that.buildScene();
+      document.body.classList.add("started");
+      setTimeout(() => {
+        that.video.play();
+      }, 3200);
+    };
   }
 
   async loadResources() {
@@ -73,11 +83,11 @@ class Scene {
 
     // SETUP VIDEO TEXTURE
     const video = document.createElement('video');
+    this.video = video;
     video.setAttribute('crossorigin', 'anonymous');
     video.src = "https://player.vimeo.com/external/538877060.hd.mp4?s=4042b4dc217598f5ce7c4cf8b8c3787b42218ea3&profile_id=175";
     // video.src = "https://cf.appdrag.com/wassimdemo/asset/WIN_20210509_13_19_28_Pro.mp4";
     video.load();
-    window.video = video;
     const videoTexture = new THREE.VideoTexture(video);
     videoTexture.wrapT = THREE.RepeatWrapping;
     videoTexture.repeat.y = - 1;
