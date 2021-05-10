@@ -45,12 +45,12 @@ class Scene {
       document.body.classList.add("loaded");
     }, 1000);
 
-    const that = this;
+    const self = this;
     document.querySelector('.loading-screen__button').onclick = () => {
-      that.buildScene();
+      self.buildScene();
       document.body.classList.add("started");
       setTimeout(() => {
-        that.video.play();
+        self.video.play();
       }, 3200);
     };
   }
@@ -93,6 +93,7 @@ class Scene {
     videoTexture.repeat.y = - 1;
     const videoMaterial =  new THREE.MeshBasicMaterial( {map: videoTexture, side: THREE.FrontSide, toneMapped: false} );
 
+    const self = this;
     // SETUP CUSTOM MATERIALS
     gltf.scene.traverse((child) => {
       if (child.isMesh) {
@@ -102,6 +103,7 @@ class Scene {
           child.material = glassMaterial;
         }
         if (child.material.name == 'ScreenComputer') {
+          self.computerObject = child;
           child.material = videoMaterial;
         }
       }
@@ -427,12 +429,22 @@ class Scene {
         }
       });
     });
+
+    let isHoveringComputerScreen = false;
     renderer.domElement.addEventListener('mousemove', (event) => {
       mouseMove(event.clientX, event.clientY);
     });
 
     renderer.domElement.addEventListener('pointerdown', (event) => {
-      console.log('oh');
+      if (isHoveringComputerScreen) {
+        if (self.video.paused) {
+          self.video.play(); 
+        } else {
+          self.video.pause();
+        }
+      } else {
+        console.log('ne');
+      }
     });
 
     renderer.domElement.addEventListener('touchstart', (event) => {
@@ -451,26 +463,13 @@ class Scene {
     const clock = new THREE.Clock();
     let previousTime = 0;
     let cursorMovement = document.getElementById('cursorMovement');
+    const self = this;
     const tick = () => {
       stats.begin();
       const elapsedTime = clock.getElapsedTime();
       const deltaTime = elapsedTime - previousTime;
       previousTime = elapsedTime;
 
-
-      // Update controls
-      // if (currentPoint) {
-      //   controls.target.lerp(currentPoint.position, 0.06);
-      // } else {
-      //   if (camToSave.resetPosition) {
-      //     camera.position.lerp(camToSave.position, 0.12);
-      //     camera.quaternion.slerp(camToSave.quaternion, 0.12);
-      //     controls.target.lerp(camToSave.controlTarget, 0.12);
-      //     if (camera.position.distanceTo(camToSave.position) < 0.01) {
-      //       camToSave.resetPosition = false;
-      //     }
-      //   }
-      // }
       controls.update();
 
       // Go through each point
@@ -510,6 +509,14 @@ class Scene {
           {
             point.element.classList.add('visible')
           }
+        }
+
+        raycaster.setFromCamera(mouse, camera);
+        const intersectsComputer = raycaster.intersectObjects([self.computerObject]);
+        if (intersectsComputer.length) {
+          isHoveringComputerScreen = true;
+        } else {
+          isHoveringComputerScreen = false;
         }
       }
 
