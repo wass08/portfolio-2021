@@ -194,31 +194,37 @@ class Scene {
         offset: new THREE.Vector3(0.1, 0, 0),
         element: document.querySelector('.point--education'),
         details: document.querySelector('.screen--education'),
+        visible: false,
       },
       'SM_Prop_CorkBoard_01' : {
         offset: new THREE.Vector3(-0.4, 0.3, 0.3),
         element: document.querySelector('.point--activities'),
         details: document.querySelector('.screen--activities'),
+        visible: false,
       },
       'SM_Prop_Trophy_01' : {
         offset: new THREE.Vector3(0, 0, 0.3),
         element: document.querySelector('.point--achievements'),
         details: document.querySelector('.screen--achievements'),
+        visible: false,
       },
       'SM_Prop_Computer_Setup_01' : {
         offset: new THREE.Vector3(0, 0.2, 0.5),
         element: document.querySelector('.point--about'),
         details: document.querySelector('.screen--about'),
+        visible: false,
       },
       'SM_Prop_Phone_Desk_01' : {
         offset: new THREE.Vector3(0, 0.27, 0),
         element: document.querySelector('.point--contact'),
         details: document.querySelector('.screen--contact'),
+        visible: false,
       },
       'SM_Prop_Book_Group_02' : {
         offset: new THREE.Vector3(0, 0, 0.3),
         element: document.querySelector('.point--skills'),
         details: document.querySelector('.screen--skills'),
+        visible: false,
       }
      };
     /*
@@ -360,16 +366,19 @@ class Scene {
       BOTTOM: 40 // down arrow
     }
 
-    
+    document.body.classList.add('camera-moving');
     gsap.to(camera.position, {
 			duration: 4,
 			x: -1.8,
 			y: 1.3,
 			z: 1.1,
       delay: 2.4,
-			onUpdate: function() {
+			onUpdate: () => {
         controls.target.set(defaultControlsPosition.x, defaultControlsPosition.y, defaultControlsPosition.z);
-			}
+			},
+      onComplete: () => {
+        document.body.classList.remove('camera-moving');
+      },
 		});
 
     /*
@@ -388,6 +397,7 @@ class Scene {
         camToSave.position = camera.position.clone();
         camToSave.quaternion = camera.quaternion.clone();
         let triggeredVisibilityDetails = false;
+      document.body.classList.add('camera-moving');
         let tween = gsap.to(controls.target, {
           duration: 1.2,
           x: point.position.x,
@@ -400,6 +410,9 @@ class Scene {
               document.body.classList.add("details")
               point.details.classList.add("visible");
             }
+          },
+          onComplete: () => {
+            document.body.classList.remove('camera-moving');
           }
         });
       });
@@ -410,13 +423,15 @@ class Scene {
       document.body.classList.remove("details");
       currentPoint.details.classList.remove("visible");
       currentPoint = null;
+      document.body.classList.add('camera-moving');
       gsap.to(controls.target, {
         duration: 1.2,
         x: defaultControlsPosition.x,
         y: defaultControlsPosition.y,
         z: defaultControlsPosition.z,
         delay: 0,
-        onComplete: function() {
+        onComplete: () => {
+          document.body.classList.remove('camera-moving');
         }
       });
       gsap.to(camera.position, {
@@ -457,6 +472,15 @@ class Scene {
       // cursorMovement.style.transform = `translateX(${x}px) translateY(${y}px)`;
     }
 
+    const setVisibilityForPoint = (point, visible) => {
+      if (visible && !point.visible) {
+        point.element.classList.add('visible');
+      }
+      if (!visible && point.visible) {
+        point.element.classList.remove('visible');
+      }
+      point.visible = visible;
+    }
     /**
      * Animate
      */
@@ -487,7 +511,7 @@ class Scene {
         let frustum = new THREE.Frustum();
         frustum.setFromProjectionMatrix( new THREE.Matrix4().multiplyMatrices( camera.projectionMatrix, camera.matrixWorldInverse ) );
         if (!frustum.containsPoint(point.position)) {
-          point.element.classList.remove('visible');
+          setVisibilityForPoint(point, false);
           continue ;
         }
 
@@ -495,7 +519,7 @@ class Scene {
         const intersects = raycaster.intersectObjects(scene.children, true);
         if(intersects.length === 0)
         {
-          point.element.classList.add('visible');
+          setVisibilityForPoint(point, true);
         }
         else
         {
@@ -503,11 +527,11 @@ class Scene {
           const pointDistance = point.position.distanceTo(camera.position);
           if(intersectionDistance < pointDistance)
           {
-            point.element.classList.remove('visible');
+            setVisibilityForPoint(point, false);
           }
           else
           {
-            point.element.classList.add('visible')
+            setVisibilityForPoint(point, true);
           }
         }
 

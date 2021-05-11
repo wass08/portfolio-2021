@@ -158,8 +158,8 @@ body:not(.loaded) .loading-screen__button {
   text-align: center;
   font-size: 20px;
   cursor: pointer;
-  transform: scale(0, 0);
-  transition: transform 0.3s;
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
 .point__label::before {
@@ -175,9 +175,9 @@ body:not(.loaded) .loading-screen__button {
   backdrop-filter: blur(5px);
 }
 
-.point.visible .point__label
+body:not(.camera-moving):not(.details) .point.visible .point__label
 {
-  transform: scale(1, 1);
+  opacity: 1;
 }
 
 .point:hover .text
@@ -362,9 +362,14 @@ body:not(.details) .details {
   color:#666;
 }
 
+
 /*
 ** Achievements
 */
+
+.achievements {
+  padding-left: 19px;
+}
 
 .achievements li {
   margin: 8px 0;
