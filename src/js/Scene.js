@@ -51,7 +51,7 @@ class Scene {
       document.body.classList.add("started");
       setTimeout(() => {
         self.video.play();
-      }, 3200);
+      }, 4200);
     };
   }
 
@@ -59,9 +59,9 @@ class Scene {
     /**
      * Fonts
      */
-    const fontLoader = new THREE.FontLoader(this.loadingManager)
+    // const fontLoader = new THREE.FontLoader(this.loadingManager)
 
-    this.font = await fontLoader.loadAsync('/fonts/Poppins SemiBold_Regular.json');
+    // this.font = await fontLoader.loadAsync('/fonts/Poppins SemiBold_Regular.json');
 
     /**
     * Models
@@ -86,7 +86,7 @@ class Scene {
     this.video = video;
     video.setAttribute('crossorigin', 'anonymous');
     video.src = "https://player.vimeo.com/external/538877060.hd.mp4?s=4042b4dc217598f5ce7c4cf8b8c3787b42218ea3&profile_id=175";
-    // video.src = "https://cf.appdrag.com/wassimdemo/asset/WIN_20210509_13_19_28_Pro.mp4";
+    //video.src = "https://cf.appdrag.com/wassimdemo/asset/welcome.mp4";
     video.load();
     const videoTexture = new THREE.VideoTexture(video);
     videoTexture.wrapT = THREE.RepeatWrapping;
@@ -99,6 +99,10 @@ class Scene {
       if (child.isMesh) {
         child.material.emissive = child.material.color;
         child.material.emissiveMap = child.material.map;
+        if (child.material.name == "Baked") {
+          console.log(child.material);
+          window.material = child.material;
+        }
         if (child.material && child.material.name == 'A_Glass') {
           child.material = glassMaterial;
         }
@@ -455,7 +459,7 @@ class Scene {
         if (self.video.paused) {
           self.video.play(); 
         } else {
-          self.video.pause();
+          //self.video.pause();
         }
       } else {
         console.log('ne');
