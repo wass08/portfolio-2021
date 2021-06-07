@@ -72,7 +72,7 @@ class Scene {
     this.gltfLoader.setDRACOLoader(dracoLoader)
 
     // LOAD OFFICE
-    const gltf = await this.gltfLoader.loadAsync('/models/Offices/office.gltf');
+    const gltf = await this.gltfLoader.loadAsync('/models/Offices/office.glb');
 
     // SETUP GLASS MATERIAL
     const glassMaterial = new THREE.MeshBasicMaterial({
@@ -92,24 +92,24 @@ class Scene {
     videoTexture.wrapT = THREE.RepeatWrapping;
     videoTexture.repeat.y = - 1;
     const videoMaterial =  new THREE.MeshBasicMaterial( {map: videoTexture, side: THREE.FrontSide, toneMapped: false} );
-
+    const cactusLightMaterial = new THREE.MeshBasicMaterial({ color: 0x58FF59 })
     const self = this;
     // SETUP CUSTOM MATERIALS
+    const textureLoader = new THREE.TextureLoader()
+    const bakedTexture = textureLoader.load('./models/textures/Baked.jpg');
+    const bakedMaterial = new THREE.MeshBasicMaterial({ map: bakedTexture });
+    bakedTexture.flipY = false;
+    bakedTexture.encoding = THREE.sRGBEncoding;
+
     gltf.scene.traverse((child) => {
-      if (child.isMesh) {
-        child.material.emissive = child.material.color;
-        child.material.emissiveMap = child.material.map;
-        if (child.material.name == "Baked") {
-          console.log(child.material);
-          window.material = child.material;
-        }
-        if (child.material && child.material.name == 'A_Glass') {
-          child.material = glassMaterial;
-        }
-        if (child.material.name == 'ScreenComputer') {
-          self.computerObject = child;
-          child.material = videoMaterial;
-        }
+      if (child.name === "Screen") {
+        self.computerObject = child;
+        child.material = videoMaterial;
+      } else if (child.name === "SM_Prop_Neon_Cactus_Light") {
+        child.material = cactusLightMaterial;
+        console.log('ok');
+      } else {
+        child.material = bakedMaterial;
       }
     });
 
@@ -194,37 +194,37 @@ class Scene {
      */
      const raycaster = new THREE.Raycaster();
      const points = {
-      'SM_Prop_Certificate_01' : {
+      'Education' : {
         offset: new THREE.Vector3(0.1, 0, 0),
         element: document.querySelector('.point--education'),
         details: document.querySelector('.screen--education'),
         visible: false,
       },
-      'SM_Prop_CorkBoard_01' : {
+      'Activities' : {
         offset: new THREE.Vector3(-0.4, 0.3, 0.3),
         element: document.querySelector('.point--activities'),
         details: document.querySelector('.screen--activities'),
         visible: false,
       },
-      'SM_Prop_Trophy_01' : {
+      'Achievements' : {
         offset: new THREE.Vector3(0, 0, 0.3),
         element: document.querySelector('.point--achievements'),
         details: document.querySelector('.screen--achievements'),
         visible: false,
       },
-      'SM_Prop_Computer_Setup_01' : {
+      'About' : {
         offset: new THREE.Vector3(0, 0.2, 0.5),
         element: document.querySelector('.point--about'),
         details: document.querySelector('.screen--about'),
         visible: false,
       },
-      'SM_Prop_Phone_Desk_01' : {
+      'Contact' : {
         offset: new THREE.Vector3(0, 0.27, 0),
         element: document.querySelector('.point--contact'),
         details: document.querySelector('.screen--contact'),
         visible: false,
       },
-      'SM_Prop_Book_Group_02' : {
+      'Skills' : {
         offset: new THREE.Vector3(0, 0, 0.3),
         element: document.querySelector('.point--skills'),
         details: document.querySelector('.screen--skills'),
@@ -503,6 +503,7 @@ class Scene {
       // Go through each point
       for(const key in points)
       {
+        //continue ;
         const point = points[key];
         const screenPosition = point.position.clone();
         screenPosition.project(camera);
