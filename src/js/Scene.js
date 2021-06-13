@@ -13,7 +13,7 @@ import gsap from 'gsap'
 
 import Stats from 'stats.js'
 import * as dat from 'dat.gui'
-import { TetrahedronGeometry, Vector2 } from 'three'
+import { Vector2 } from 'three'
 
 class Scene {
   constructor() {
@@ -77,12 +77,6 @@ class Scene {
   }
 
   async loadResources() {
-    /**
-     * Fonts
-     */
-    // const fontLoader = new THREE.FontLoader(this.loadingManager)
-
-    // this.font = await fontLoader.loadAsync('/fonts/Poppins SemiBold_Regular.json');
 
     /**
     * Models
@@ -133,14 +127,6 @@ class Scene {
     });
 
     this.office = gltf.scene;
-
-    // LOAD PLAYER ANIMATIONS
-    // this.characterAnimations = (await this.gltfLoader.loadAsync('/models/Characters/character_animations.glb')).animations;
-    // LOAD PLAYER MESHES
-    // boss_female_01 boss_male_01
-    // this.playerMeshes = {
-    //   boss_male_01: (await this.gltfLoader.loadAsync('/models/Characters/boss_male_01.gltf')).scene.children[0]
-    // };
   }
 
   async buildScene() {
@@ -372,6 +358,21 @@ class Scene {
     const camToSave = {};
     let currentPoint;
     const mouse = new THREE.Vector2();
+
+    renderer.domElement.addEventListener('mousemove', (event) =>
+    {
+        mouseMove(event.clientX, event.clientY)
+    });
+
+    renderer.domElement.addEventListener('touchstart', (event) =>
+    {
+      mouseMove(event.touches[0].clientX, event.touches[0].clientY);
+    });
+
+    const mouseMove = (x, y) => {
+      mouse.x = x / sizes.width * 2 - 1;
+      mouse.y = - (y / sizes.height) * 2 + 1;
+    }
 
     for(const key in points)
     {
