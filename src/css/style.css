@@ -101,6 +101,18 @@ body:not(.loaded) .loading-screen__button {
   border-color: black;
 }
 
+.loading-screen__sound {
+  margin-top: 8px;
+}
+
+.loading-screen__sound:hover {
+  cursor:pointer;
+}
+
+.loading-screen__sound--disabled {
+  text-decoration: line-through;
+}
+
 @media (max-width:789px) {
   .loading-screen__title,
   .loading-screen__title--loader {
@@ -113,9 +125,10 @@ body:not(.loaded) .loading-screen__button {
 
 
 .loading-screen__subtitle {
-  font-size: 28px;
-  color:black;
+  font-size: 24px;
+  color:#5e5465;
   position: relative;
+  text-align: center;
 }
 
 

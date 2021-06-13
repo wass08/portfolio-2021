@@ -13,7 +13,7 @@ import gsap from 'gsap'
 
 import Stats from 'stats.js'
 import * as dat from 'dat.gui'
-import { TetrahedronGeometry } from 'three'
+import { TetrahedronGeometry, Vector2 } from 'three'
 
 class Scene {
   constructor() {
@@ -21,6 +21,26 @@ class Scene {
   }
 
   async setup() {
+    const self = this;
+
+    this.soundEnabled = localStorage.getItem('soundEnabled') != "0";
+
+    const buttonSoundSelector = document.querySelector('.loading-screen__sound');
+    const displaySoundState = () => {
+      if (self.soundEnabled) {
+        buttonSoundSelector.classList.remove('loading-screen__sound--disabled');
+      } else {
+        buttonSoundSelector.classList.add('loading-screen__sound--disabled');
+      }
+    }
+    displaySoundState();
+
+    buttonSoundSelector.onclick = () => {
+      self.soundEnabled = !self.soundEnabled;
+      localStorage.setItem('soundEnabled', self.soundEnabled ? "1" : "0");
+      displaySoundState();
+    };
+
     const loadingScreenTitleLoader = document.querySelector(".loading-screen__title--loader");
     this.loadingManager = new THREE.LoadingManager(
         // Loaded
@@ -39,20 +59,21 @@ class Scene {
     );
     await this.loadResources();
     console.log('resources loaded');
-    // await this.buildScene();
     
     setTimeout(() => {
       document.body.classList.add("loaded");
     }, 1000);
 
-    const self = this;
     document.querySelector('.loading-screen__button').onclick = () => {
       self.buildScene();
       document.body.classList.add("started");
       setTimeout(() => {
+        self.video.muted = !self.soundEnabled;
         self.video.play();
       }, 4200);
     };
+
+    
   }
 
   async loadResources() {
@@ -74,25 +95,22 @@ class Scene {
     // LOAD OFFICE
     const gltf = await this.gltfLoader.loadAsync('/models/Offices/office.glb');
 
-    // SETUP GLASS MATERIAL
-    const glassMaterial = new THREE.MeshBasicMaterial({
-      color: 0xFFFFFF,
-      opacity: 0.5,
-      transparent: true,
-    });
 
     // SETUP VIDEO TEXTURE
     const video = document.createElement('video');
     this.video = video;
     video.setAttribute('crossorigin', 'anonymous');
-    video.src = "https://player.vimeo.com/external/538877060.hd.mp4?s=4042b4dc217598f5ce7c4cf8b8c3787b42218ea3&profile_id=175";
-    //video.src = "https://cf.appdrag.com/wassimdemo/asset/welcome.mp4";
+    //video.src = "https://player.vimeo.com/external/538877060.hd.mp4?s=4042b4dc217598f5ce7c4cf8b8c3787b42218ea3&profile_id=175";
+    video.src = "https://cf.appdrag.com/wassimdemo/asset/welcome.mp4";
     video.load();
     const videoTexture = new THREE.VideoTexture(video);
     videoTexture.wrapT = THREE.RepeatWrapping;
-    videoTexture.repeat.y = - 1;
+    videoTexture.repeat.y = -1;
+    videoTexture.rotation = -Math.PI/2;
+    videoTexture.center = new Vector2(0.5, 0.5);
     const videoMaterial =  new THREE.MeshBasicMaterial( {map: videoTexture, side: THREE.FrontSide, toneMapped: false} );
-    const cactusLightMaterial = new THREE.MeshBasicMaterial({ color: 0x58FF59 })
+    const cactusLightMaterial = new THREE.MeshBasicMaterial({ color: 0x58FF59 });
+    const tubeLightMaterial = new THREE.MeshBasicMaterial({ color: 0x5B3EFF });
     const self = this;
     // SETUP CUSTOM MATERIALS
     const textureLoader = new THREE.TextureLoader()
@@ -107,7 +125,8 @@ class Scene {
         child.material = videoMaterial;
       } else if (child.name === "SM_Prop_Neon_Cactus_Light") {
         child.material = cactusLightMaterial;
-        console.log('ok');
+      } else if (child.name.includes('TubeLight')) {
+        child.material = tubeLightMaterial;
       } else {
         child.material = bakedMaterial;
       }
@@ -127,18 +146,19 @@ class Scene {
   async buildScene() {
 
     // Debug
-    const gui = new dat.GUI()
-    this.gui = gui;
-    //gui.hide();
+    if (window.location.hash == "#dev") {
+      const gui = new dat.GUI()
+      this.gui = gui;
 
-    const stats = new Stats()
-    this.stats = stats;
-    stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
-    document.body.appendChild(stats.dom)
-    stats.dom.style.right = '0';
-    stats.dom.style.left = '';
-    stats.dom.style.bottom = '0';
-    stats.dom.style.top = '';
+      const stats = new Stats()
+      this.stats = stats;
+      stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
+      document.body.appendChild(stats.dom)
+      stats.dom.style.right = '0';
+      stats.dom.style.left = '';
+      stats.dom.style.bottom = '0';
+      stats.dom.style.top = '';
+  }
 
     // Canvas
     const canvas = document.querySelector('canvas.webgl')
@@ -148,47 +168,7 @@ class Scene {
 
 
 
-    /**
-     * Lights
-     */
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.1)
-    scene.add(ambientLight)
-
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.4)
-    directionalLight.position.set(2,5,2);
-
-    scene.add(directionalLight);
-    directionalLight.castShadow = true;
-    directionalLight.shadow.camera.near = -3;
-    directionalLight.shadow.camera.far = 8;
-    // directionalLight.shadow.camera.left = 1;
-    // directionalLight.shadow.camera.right = 10;
-    directionalLight.shadow.camera.top = 6;
-    directionalLight.shadow.camera.bottom = -6;
-    directionalLight.shadow.mapSize.width = 512
-    directionalLight.shadow.mapSize.height = 512
-    directionalLight.shadow.normalBias = 0.05
-    const directionalLightCameraHelper = new THREE.CameraHelper(directionalLight.shadow.camera)
-    // scene.add(directionalLightCameraHelper)
-    /**
-     * Char
-     */
-
-    // let wassim = this.playerMeshes.boss_male_01;
-    // scene.add(wassim);
-    // wassim.traverse((child) =>
-    // {
-    //   if ( child.isMesh ) {
-    //     child.material.emissive =  child.material.color;
-    //     child.material.emissiveMap = child.material.map ;
-    //   }
-
-    //   if(child instanceof THREE.Mesh)
-    //   {
-    //     child.castShadow = true
-    //     child.receiveShadow = false
-    //   }
-    // })
+   
     /**
      * Labels
      */
@@ -201,7 +181,7 @@ class Scene {
         visible: false,
       },
       'Activities' : {
-        offset: new THREE.Vector3(-0.4, 0.3, 0.3),
+        offset: new THREE.Vector3(-0.4, -0.2, 0.1),
         element: document.querySelector('.point--activities'),
         details: document.querySelector('.screen--activities'),
         visible: false,
@@ -213,13 +193,13 @@ class Scene {
         visible: false,
       },
       'About' : {
-        offset: new THREE.Vector3(0, 0.2, 0.5),
+        offset: new THREE.Vector3(0, -0.1, -0.2),
         element: document.querySelector('.point--about'),
         details: document.querySelector('.screen--about'),
         visible: false,
       },
       'Contact' : {
-        offset: new THREE.Vector3(0, 0.27, 0),
+        offset: new THREE.Vector3(0, -0.1, 0),
         element: document.querySelector('.point--contact'),
         details: document.querySelector('.screen--contact'),
         visible: false,
@@ -450,31 +430,12 @@ class Scene {
     });
 
     let isHoveringComputerScreen = false;
-    renderer.domElement.addEventListener('mousemove', (event) => {
-      mouseMove(event.clientX, event.clientY);
-    });
 
-    renderer.domElement.addEventListener('pointerdown', (event) => {
-      if (isHoveringComputerScreen) {
-        if (self.video.paused) {
+    renderer.domElement.addEventListener('pointerdown', () => {
+      if (isHoveringComputerScreen && self.video.paused) {
           self.video.play(); 
-        } else {
-          //self.video.pause();
-        }
-      } else {
-        console.log('ne');
       }
     });
-
-    renderer.domElement.addEventListener('touchstart', (event) => {
-
-    });
-
-    const mouseMove = (x, y) => {
-      mouse.x = x / sizes.width * 2 - 1;
-      mouse.y = - (y / sizes.height) * 2 + 1;
-      // cursorMovement.style.transform = `translateX(${x}px) translateY(${y}px)`;
-    }
 
     const setVisibilityForPoint = (point, visible) => {
       if (visible && !point.visible) {
@@ -485,15 +446,17 @@ class Scene {
       }
       point.visible = visible;
     }
+
     /**
      * Animate
      */
     const clock = new THREE.Clock();
     let previousTime = 0;
-    let cursorMovement = document.getElementById('cursorMovement');
     const self = this;
     const tick = () => {
-      stats.begin();
+      if (self.stats) {
+        self.stats.begin();
+      }
       const elapsedTime = clock.getElapsedTime();
       const deltaTime = elapsedTime - previousTime;
       previousTime = elapsedTime;
@@ -503,7 +466,6 @@ class Scene {
       // Go through each point
       for(const key in points)
       {
-        //continue ;
         const point = points[key];
         const screenPosition = point.position.clone();
         screenPosition.project(camera);
@@ -550,10 +512,11 @@ class Scene {
       }
 
       // Render
-      // renderer.render(scene, camera)
       effectComposer.render();
 
-      stats.end();
+      if (self.stats) {
+        self.stats.end();
+      }
       // Call tick again on the next frame
       window.requestAnimationFrame(tick);
     }
