@@ -105,6 +105,7 @@ class Scene {
     const videoMaterial =  new THREE.MeshBasicMaterial( {map: videoTexture, side: THREE.FrontSide, toneMapped: false} );
     const cactusLightMaterial = new THREE.MeshBasicMaterial({ color: 0x58FF59 });
     const tubeLightMaterial = new THREE.MeshBasicMaterial({ color: 0x5B3EFF });
+    const deskLightMaterial = new THREE.MeshBasicMaterial({ color: 0x0E7DFF });
     const self = this;
     // SETUP CUSTOM MATERIALS
     const textureLoader = new THREE.TextureLoader()
@@ -121,6 +122,8 @@ class Scene {
         child.material = cactusLightMaterial;
       } else if (child.name.includes('TubeLight')) {
         child.material = tubeLightMaterial;
+      } else if (child.name.includes('DeskLight')) {
+        child.material = deskLightMaterial;
       } else {
         child.material = bakedMaterial;
       }
@@ -251,7 +254,7 @@ class Scene {
      * Camera
      */
     // Base camera
-    const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 0.001, 80);
+    const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 0.01, 80);
     scene.add(camera);
     camera.position.set(2, 1.5, -2);
     
