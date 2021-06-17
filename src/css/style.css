@@ -113,17 +113,6 @@ body:not(.loaded) .loading-screen__button {
   text-decoration: line-through;
 }
 
-@media (max-width:789px) {
-  .loading-screen__title,
-  .loading-screen__title--loader {
-    font-size: 42px;
-  }
-  .loading-screen__subtitle {
-    font-size: 22px;
-  }
-}
-
-
 .loading-screen__subtitle {
   font-size: 24px;
   color:#5e5465;
@@ -400,4 +389,34 @@ body:not(.details) .details {
 
 .contact svg {
   width:32px;
+}
+
+/*
+** Responsive
+*/
+
+@media (max-width:1024px) {
+  .loading-screen__title,
+  .loading-screen__title--loader {
+    font-size: 42px;
+  }
+  .loading-screen__subtitle {
+    font-size: 22px;
+  }
+
+  .details, .screen {
+    padding: 16px;
+  }
+
+  .screen__content {
+    margin: 0;
+  }
+
+  .skill-category, .activity {
+    margin: 8px 0;
+  }
+
+  .education {
+    margin-top: 8px;
+  }
 }
