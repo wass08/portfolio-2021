@@ -164,19 +164,19 @@ class Scene {
      const raycaster = new THREE.Raycaster();
      const points = {
       'Education' : {
-        offset: new THREE.Vector3(0.1, 0, 0),
+        offset: new THREE.Vector3(0.1, -0.24, 0),
         element: document.querySelector('.point--education'),
         details: document.querySelector('.screen--education'),
         visible: false,
       },
       'Activities' : {
-        offset: new THREE.Vector3(-0.4, -0.2, 0.1),
+        offset: new THREE.Vector3(-0.6, -0.33, -0.2),
         element: document.querySelector('.point--activities'),
         details: document.querySelector('.screen--activities'),
         visible: false,
       },
       'Achievements' : {
-        offset: new THREE.Vector3(0, 0, 0.3),
+        offset: new THREE.Vector3(0, -0.3, 0.2),
         element: document.querySelector('.point--achievements'),
         details: document.querySelector('.screen--achievements'),
         visible: false,
@@ -406,7 +406,7 @@ class Scene {
       });
     }
     
-    document.querySelector('.details__back').addEventListener('pointerdown', (event) => {
+    const closeDetailsPanel = () => {
       camToSave.resetPosition = true;
       document.body.classList.remove("details");
       currentPoint.details.classList.remove("visible");
@@ -431,6 +431,10 @@ class Scene {
         onUpdate: function() {
         }
       });
+    };
+
+    document.querySelectorAll('.screen__close').forEach(closeButton => {
+      closeButton.addEventListener('pointerdown', closeDetailsPanel);
     });
 
     let isHoveringComputerScreen = false;

@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Catamaran:wght@800&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@400; 500; 800&display=swap');
 
 * {
   margin: 0;
@@ -13,8 +12,8 @@ html, body {
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 400;
+  font-family: 'Catamaran', sans-serif;
+  font-weight: 500;
   color:#666666;
   line-height: 150%;
   font-size: 16px;
@@ -35,9 +34,14 @@ canvas.webgl {
 }
 
 a {
-  font-weight: bold;
+  font-weight: 800;
   color:black;
   text-decoration: none;
+  transition: opacity .2s;
+}
+
+a:hover {
+  opacity: 0.8;
 }
 
 .noselect {
@@ -87,18 +91,37 @@ body:not(.loaded) .loading-screen__button {
 
 .loading-screen__button {
   margin-top: 16px;
-  padding: 12px 32px;
+  padding: 8px 40px;
   border: solid 2px #666666;
   transition: all .4s;
   font-family: 'Catamaran';
   color: #666666;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
 }
 
 .loading-screen__button:hover {
-  background:black;
   color:white;
   cursor:pointer;
   border-color: black;
+}
+
+.loading-screen__button::before {
+  content:'';
+  position:absolute;
+  z-index: -1;
+  background:black;
+  left:-12px;
+  top:-12px;
+  width:0%;
+  height:calc(100% + 24px);
+  transition: all .4s;
+  transform: skew(24deg);
+}
+
+.loading-screen__button:hover::before {
+  width:calc(100% + 24px);
 }
 
 .loading-screen__sound {
@@ -209,30 +232,11 @@ body:not(.details) .details {
   background-color: rgb(255 255 255 / 42%);
 }
 
-.details__back {
-  font-family: 'Catamaran';
-  font-weight: 700;
-  padding: 8px 16px;
-  margin-top: 16px;
-  border-radius: 4px;
-  background-color: white;
-  color: black;
-  transition: all .4s;
-}
-
-.details__back:hover {
-  cursor: pointer;
-  color:white;
-  background: rgba(0, 0, 0, 0.85);
-}
-
 /*
 ** SCREEN
 */
 
 .screen {
-  background-color: white;
-  border-radius: 4px;
   width: 620px;
   max-width: 100%;
   padding:32px;
@@ -240,17 +244,67 @@ body:not(.details) .details {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-
+  align-items: flex-start;
+  position: relative;
 }
 
 .screen__title {
   font-size: 36px;
   color:black;
+  position: relative;
+}
+
+.screen__title::before {
+  content: '';
+  position: absolute;
+  background: #ffa50080;
+  top: 100%;
+  left: 0;
+  width: calc(100% + 24px);
+  height: 24px;
+  z-index: -1;
+  transform: rotate(-5deg) translateY(-100%) translateX(-12px);
+}
+
+.screen__close {
+  right: 14px;
+  top: 82px;
+  width: 42px;
+  height: 42px;
+  background: rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s;
+  position: absolute;
+  border-radius: 32px;
+}
+
+.screen__close:hover {
+  background: rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.screen__close::before, 
+.screen__close::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 20px;
+    background-color: black;
+    transform: rotate(45deg) translate(-50%, -50%);
+    transform-origin: top left;
+    content: '';
+}
+.screen__close::after {
+    transform: rotate(-45deg) translate(-50%, -50%);
 }
 
 .screen__content {
+  border-radius: 4px;
   overflow-y: auto;
-  padding: 16px 0;
+  padding: 16px 16px;
+  background: rgba(255, 255, 255, 0.82);
+  margin-top: 32px;
+  width: 100%;
 }
 
 .screen:not(.visible) {
@@ -299,7 +353,7 @@ body:not(.details) .details {
   font-size: 18px;
   color: black;
   font-family: 'Catamaran';
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .activity__position {
@@ -320,15 +374,15 @@ body:not(.details) .details {
 }
 
 .date svg polygon {
-  fill:#ececec;
+  fill:#d1d1d1;
 }
 
 .date__from, .date__to {
   padding: 2px 12px;
-  background: #ececec;
+  background: #d1d1d1;
   color: black;
   font-size: 13px;
-  font-weight: bold;
+  font-weight: 800;
 }
 
 .date__from {
@@ -357,7 +411,7 @@ body:not(.details) .details {
   font-size: 18px;
   color: black;
   font-family: 'Catamaran';
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .skill-category__content {
@@ -408,8 +462,9 @@ body:not(.details) .details {
     padding: 16px;
   }
 
-  .screen__content {
-    margin: 0;
+  .screen__close {
+    right: 0;
+    top: 64px;
   }
 
   .skill-category, .activity {
