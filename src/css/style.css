@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@400; 500; 800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Catamaran:wght@400; 500; 800&display=swap");
 
 * {
   margin: 0;
@@ -6,24 +6,30 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   overflow: hidden;
 }
 
 body {
-  font-family: 'Catamaran', sans-serif;
+  font-family: "Catamaran", sans-serif;
   font-weight: 500;
-  color:#666666;
+  color: #666666;
   line-height: 150%;
   font-size: 16px;
- }
- 
- h1, h2, h3, h4, h5, h6 {
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   line-height: 100%;
-  font-family: 'Catamaran', sans-serif;
+  font-family: "Catamaran", sans-serif;
   font-weight: 800;
- }
+}
 
 canvas.webgl {
   position: fixed;
@@ -35,9 +41,16 @@ canvas.webgl {
 
 a {
   font-weight: 800;
-  color:black;
+  color: black;
   text-decoration: none;
-  transition: opacity .2s;
+  transition: opacity 0.2s;
+}
+
+.github-corner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 42;
 }
 
 a:hover {
@@ -46,11 +59,11 @@ a:hover {
 
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Old versions of Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
 
@@ -84,7 +97,6 @@ body.started .loading-screen {
   position: relative;
 }
 
-
 body:not(.loaded) .loading-screen__button {
   opacity: 0;
 }
@@ -93,8 +105,8 @@ body:not(.loaded) .loading-screen__button {
   margin-top: 16px;
   padding: 8px 40px;
   border: solid 2px #666666;
-  transition: all .4s;
-  font-family: 'Catamaran';
+  transition: all 0.4s;
+  font-family: "Catamaran";
   color: #666666;
   border-radius: 4px;
   position: relative;
@@ -102,26 +114,26 @@ body:not(.loaded) .loading-screen__button {
 }
 
 .loading-screen__button:hover {
-  color:white;
-  cursor:pointer;
+  color: white;
+  cursor: pointer;
   border-color: black;
 }
 
 .loading-screen__button::before {
-  content:'';
-  position:absolute;
+  content: "";
+  position: absolute;
   z-index: -1;
-  background:black;
-  left:-12px;
-  top:-12px;
-  width:0%;
-  height:calc(100% + 24px);
-  transition: all .4s;
+  background: black;
+  left: -12px;
+  top: -12px;
+  width: 0%;
+  height: calc(100% + 24px);
+  transition: all 0.4s;
   transform: skew(24deg);
 }
 
 .loading-screen__button:hover::before {
-  width:calc(100% + 24px);
+  width: calc(100% + 24px);
 }
 
 .loading-screen__sound {
@@ -129,7 +141,7 @@ body:not(.loaded) .loading-screen__button {
 }
 
 .loading-screen__sound:hover {
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .loading-screen__sound--disabled {
@@ -138,11 +150,10 @@ body:not(.loaded) .loading-screen__button {
 
 .loading-screen__subtitle {
   font-size: 24px;
-  color:#5e5465;
+  color: #5e5465;
   position: relative;
   text-align: center;
 }
-
 
 .loading-screen__title--loader {
   position: absolute;
@@ -155,30 +166,26 @@ body:not(.loaded) .loading-screen__button {
   transition: width 0.5s;
 }
 
-
-
 /*
 ** POINTS
 */
 
-.point
-{
+.point {
   position: absolute;
   top: 50%;
   left: 50%;
 }
 
-.point__label
-{
+.point__label {
   position: absolute;
   top: -50px;
   left: -21px;
-  padding:8px 16px;
+  padding: 8px 16px;
   border-radius: 4px;
-  background-color: rgba(255, 255, 255, .65);  
+  background-color: rgba(255, 255, 255, 0.65);
   backdrop-filter: blur(5px);
   color: black;
-  font-family: 'Catamaran';
+  font-family: "Catamaran";
   font-weight: 800;
   text-align: center;
   font-size: 20px;
@@ -188,7 +195,7 @@ body:not(.loaded) .loading-screen__button {
 }
 
 .point__label::before {
-  content: '';
+  content: "";
   position: absolute;
   background: #ffa50080;
   top: 59%;
@@ -200,14 +207,12 @@ body:not(.loaded) .loading-screen__button {
   backdrop-filter: blur(5px);
 }
 
-body:not(.camera-moving):not(.details) .point.visible .point__label
-{
+body:not(.camera-moving):not(.details) .point.visible .point__label {
   opacity: 1;
 }
 
-.point:hover .text
-{
-    opacity: 1;
+.point:hover .text {
+  opacity: 1;
 }
 
 /*
@@ -227,7 +232,7 @@ body:not(.details) .details {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding:32px;
+  padding: 32px;
   flex-direction: column;
   background-color: rgb(255 255 255 / 42%);
 }
@@ -239,7 +244,7 @@ body:not(.details) .details {
 .screen {
   width: 620px;
   max-width: 100%;
-  padding:32px;
+  padding: 32px;
   max-height: 100%;
   overflow: hidden;
   display: flex;
@@ -250,12 +255,12 @@ body:not(.details) .details {
 
 .screen__title {
   font-size: 36px;
-  color:black;
+  color: black;
   position: relative;
 }
 
 .screen__title::before {
-  content: '';
+  content: "";
   position: absolute;
   background: #ffa50080;
   top: 100%;
@@ -282,20 +287,20 @@ body:not(.details) .details {
   cursor: pointer;
 }
 
-.screen__close::before, 
+.screen__close::before,
 .screen__close::after {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 5px;
-    height: 20px;
-    background-color: black;
-    transform: rotate(45deg) translate(-50%, -50%);
-    transform-origin: top left;
-    content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 20px;
+  background-color: black;
+  transform: rotate(45deg) translate(-50%, -50%);
+  transform-origin: top left;
+  content: "";
 }
 .screen__close::after {
-    transform: rotate(-45deg) translate(-50%, -50%);
+  transform: rotate(-45deg) translate(-50%, -50%);
 }
 
 .screen__content {
@@ -308,7 +313,7 @@ body:not(.details) .details {
 }
 
 .screen:not(.visible) {
-  display:none;
+  display: none;
 }
 
 /*
@@ -316,23 +321,23 @@ body:not(.details) .details {
 */
 
 .education {
-  margin-top:24px;
+  margin-top: 24px;
 }
 
 .education__title {
   font-size: 18px;
   font-weight: 700;
-  font-family: 'Catamaran';
+  font-family: "Catamaran";
   color: black;
 }
 
 .education__subtitle {
   margin-bottom: 8px;
-  color:#9B9B9B;
+  color: #9b9b9b;
 }
 
 .education__content {
-  margin-top:8px;
+  margin-top: 8px;
 }
 
 .education__content ul {
@@ -352,12 +357,12 @@ body:not(.details) .details {
 .activity__title {
   font-size: 18px;
   color: black;
-  font-family: 'Catamaran';
+  font-family: "Catamaran";
   font-weight: 800;
 }
 
 .activity__position {
-  color:#666;
+  color: #666;
 }
 
 /*
@@ -370,14 +375,15 @@ body:not(.details) .details {
 }
 
 .date svg {
-  width:14px;
+  width: 14px;
 }
 
 .date svg polygon {
-  fill:#d1d1d1;
+  fill: #d1d1d1;
 }
 
-.date__from, .date__to {
+.date__from,
+.date__to {
   padding: 2px 12px;
   background: #d1d1d1;
   color: black;
@@ -396,7 +402,7 @@ body:not(.details) .details {
 }
 
 .date__to-icon {
-  margin-left:-4px;
+  margin-left: -4px;
 }
 
 /*
@@ -404,20 +410,19 @@ body:not(.details) .details {
 */
 
 .skill-category {
-  margin:24px 0;
+  margin: 24px 0;
 }
 
 .skill-category__title {
   font-size: 18px;
   color: black;
-  font-family: 'Catamaran';
+  font-family: "Catamaran";
   font-weight: 800;
 }
 
 .skill-category__content {
-  color:#666;
+  color: #666;
 }
-
 
 /*
 ** Achievements
@@ -436,20 +441,20 @@ body:not(.details) .details {
 */
 
 .contact {
-  display:flex;
+  display: flex;
   align-items: center;
-  gap:16px;
+  gap: 16px;
 }
 
 .contact svg {
-  width:32px;
+  width: 32px;
 }
 
 /*
 ** Responsive
 */
 
-@media (max-width:1024px) {
+@media (max-width: 1024px) {
   .loading-screen__title,
   .loading-screen__title--loader {
     font-size: 42px;
@@ -458,7 +463,8 @@ body:not(.details) .details {
     font-size: 22px;
   }
 
-  .details, .screen {
+  .details,
+  .screen {
     padding: 16px;
   }
 
@@ -467,7 +473,8 @@ body:not(.details) .details {
     top: 64px;
   }
 
-  .skill-category, .activity {
+  .skill-category,
+  .activity {
     margin: 8px 0;
   }
 
