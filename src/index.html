@@ -1,18 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <meta name="description" content="Full Stack senior developer portfolio in ThreeJS">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Full Stack senior developer portfolio in ThreeJS"
+    />
     <link rel="icon" href="favicon.png" />
     <title>Wassim Samad Virtual Office</title>
-</head>
-<body>
+  </head>
+  <body>
     <div id="app" class="noselect">
-      <a href="https://github.com/wass08/portfolio-2021" target="_blank" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="z-index:42;fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+      <a
+        href="https://github.com/wass08/portfolio-2021"
+        target="_blank"
+        class="github-corner"
+        aria-label="View source on GitHub"
+        ><svg
+          width="80"
+          height="80"
+          viewBox="0 0 250 250"
+          style="
+            z-index: 42;
+            fill: #151513;
+            color: #fff;
+            position: absolute;
+            top: 0;
+            border: 0;
+            right: 0;
+          "
+          aria-hidden="true"
+        >
+          <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+          <path
+            d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+            fill="currentColor"
+            style="transform-origin: 130px 106px"
+            class="octo-arm"
+          ></path>
+          <path
+            d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+            fill="currentColor"
+            class="octo-body"
+          ></path></svg></a
+      ><style>
+        .github-corner:hover .octo-arm {
+          animation: octocat-wave 560ms ease-in-out;
+        }
+        @keyframes octocat-wave {
+          0%,
+          100% {
+            transform: rotate(0);
+          }
+          20%,
+          60% {
+            transform: rotate(-25deg);
+          }
+          40%,
+          80% {
+            transform: rotate(10deg);
+          }
+        }
+        @media (max-width: 500px) {
+          .github-corner:hover .octo-arm {
+            animation: none;
+          }
+          .github-corner .octo-arm {
+            animation: octocat-wave 560ms ease-in-out;
+          }
+        }
+      </style>
       <canvas class="webgl"></canvas>
-      <div class="loading-screen ">
+      <div class="loading-screen">
         <h1 class="loading-screen__title">
           Wassim Samad
           <span class="loading-screen__title--loader">Wassim Samad</span>
@@ -21,57 +82,84 @@
         <div class="loading-screen__sound">Sound enabled</div>
         <div class="loading-screen__button">ENTER</div>
       </div>
-      <div class="details ">
+      <div class="details">
         <div class="screen screen--education">
           <div class="screen__close"></div>
           <h1 class="screen__title">Education</h1>
           <div class="screen__content">
             <div class="education">
-              <div class="education__title">Master Degree in Information Technology</div>
-              <div class="education__subtitle">
-                Epitech Paris
+              <div class="education__title">
+                Master Degree in Information Technology
               </div>
+              <div class="education__subtitle">Epitech Paris</div>
               <div class="date">
                 <div class="date__from">2010</div>
-                  <svg class="date__from-icon" viewBox="0 0 16 32" xmlns="http://www.w3.org/2000/svg">
-                    <polygon points="0 0, 16 16, 0 32" fill="black"/>
-                  </svg>
-                  <svg class="date__to-icon" viewBox="0 0 16 32" xmlns="http://www.w3.org/2000/svg">
-                    <polygon points="0 0, 16 0, 16 16" fill="black"/>
-                    <polygon points="0 32, 16 32, 16 16" fill="black"/>
-                  </svg>
+                <svg
+                  class="date__from-icon"
+                  viewBox="0 0 16 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <polygon points="0 0, 16 16, 0 32" fill="black" />
+                </svg>
+                <svg
+                  class="date__to-icon"
+                  viewBox="0 0 16 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <polygon points="0 0, 16 0, 16 16" fill="black" />
+                  <polygon points="0 32, 16 32, 16 16" fill="black" />
+                </svg>
                 <div class="date__to">2015</div>
               </div>
               <div class="education__content">
-                <p>Epitech school pedagogy is based on building projects from the first to fifth year. From low level languages to higher level to have a clear understanding of how softwares work deep inside.<br/>
-                  As any  crash or bad coding practices meant a project failure, I am used to develop projects with reliability and quality as foundation.</p>
+                <p>
+                  Epitech school pedagogy is based on building projects from the
+                  first to fifth year. From low level languages to higher level
+                  to have a clear understanding of how softwares work deep
+                  inside.<br />
+                  As any crash or bad coding practices meant a project failure,
+                  I am used to develop projects with reliability and quality as
+                  foundation.
+                </p>
                 <ul>
                   <li>Software development (C, C++, Qt, C#, Python, MySQL)</li>
                   <li>Mobile applications development (Java, Objective-C)</li>
                   <li>Game development (C++, OpenGL)</li>
-                  <li>Project management, team work (GIT, UML, SVN, Mercurial)</li>
+                  <li>
+                    Project management, team work (GIT, UML, SVN, Mercurial)
+                  </li>
                 </ul>
               </div>
             </div>
             <div class="education">
               <div class="education__title">School of Software Engineering</div>
-              <div class="education__subtitle">
-                Beijing Jiaotong University
-              </div>
+              <div class="education__subtitle">Beijing Jiaotong University</div>
               <div class="date">
                 <div class="date__from">2013</div>
-                  <svg class="date__from-icon" viewBox="0 0 16 32" xmlns="http://www.w3.org/2000/svg">
-                    <polygon points="0 0, 16 16, 0 32" fill="black"/>
-                  </svg>
-                  <svg class="date__to-icon" viewBox="0 0 16 32" xmlns="http://www.w3.org/2000/svg">
-                    <polygon points="0 0, 16 0, 16 16" fill="black"/>
-                    <polygon points="0 32, 16 32, 16 16" fill="black"/>
-                  </svg>
+                <svg
+                  class="date__from-icon"
+                  viewBox="0 0 16 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <polygon points="0 0, 16 16, 0 32" fill="black" />
+                </svg>
+                <svg
+                  class="date__to-icon"
+                  viewBox="0 0 16 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <polygon points="0 0, 16 0, 16 16" fill="black" />
+                  <polygon points="0 32, 16 32, 16 16" fill="black" />
+                </svg>
                 <div class="date__to">2014</div>
               </div>
               <div class="education__content">
-                <p>One year abroad in Beijing (China) as an exchange student in the School of Software Engineering.<br/>
-                  I discovered a new culture, a new language and enhanced my adaptability.</p>
+                <p>
+                  One year abroad in Beijing (China) as an exchange student in
+                  the School of Software Engineering.<br />
+                  I discovered a new culture, a new language and enhanced my
+                  adaptability.
+                </p>
                 <ul>
                   <li>Mobile development</li>
                   <li>Project Management</li>
@@ -87,27 +175,52 @@
           <div class="screen__content">
             <div class="skill-category">
               <div class="skill-category__title">Front-End</div>
-              <div class="skill-category__content">Javascript (ES6), Typescript, Vue, React Native, Redux/Vuex, Web APIs (DOM, Video, Audio, Web Workers), ThreeJS, Sass, Tailwind</div>
+              <div class="skill-category__content">
+                Javascript (ES6), Typescript, Vue, React, React Native,
+                Redux/Vuex, Web APIs (DOM, Video, Audio, Web Workers), GraphQL,
+                ThreeJS, Sass, Tailwind
+              </div>
             </div>
             <div class="skill-category">
               <div class="skill-category__title">Back-End</div>
-              <div class="skill-category__content">NodeJS, Express (REST API), uWebSockets, Mocha/Jest (Test), Lambda (Serverless), CI/CD (CircleCI, CodePipeline)</div>
+              <div class="skill-category__content">
+                NodeJS, Nest, Express (REST API), uWebSockets, Mocha/Jest
+                (Test), Lambda (Serverless), CI/CD (CircleCI, CodePipeline)
+              </div>
             </div>
             <div class="skill-category">
               <div class="skill-category__title">Database</div>
-              <div class="skill-category__content">DynamoDB, Redis, MySQL/PostgreSQL/Aurora</div>
+              <div class="skill-category__content">
+                DynamoDB/Mongo, Redis, MySQL/PostgreSQL/Aurora
+              </div>
+            </div>
+            <div class="skill-category">
+              <div class="skill-category__title">Web 3</div>
+              <div class="skill-category__content">
+                Solidity, Truffle, Ganache, Ethers, Web3.js, Web3.providers
+              </div>
             </div>
             <div class="skill-category">
               <div class="skill-category__title">Cloud</div>
-              <div class="skill-category__content">AWS (Certified AWS Developer Associate), Digital Ocean, Heroku</div>
+              <div class="skill-category__content">
+                AWS (Certified AWS Developer Associate), Digital Ocean, Heroku
+              </div>
             </div>
             <div class="skill-category">
-              <div class="skill-category__title">Project & Product Management</div>
-              <div class="skill-category__content">Miro, Figma, Lean, Agile, Product vision, Product strategy, Discovery, North Star Metric</div>
+              <div class="skill-category__title">
+                Project & Product Management
+              </div>
+              <div class="skill-category__content">
+                Miro, Figma, Lean, Agile, Product vision, Product strategy,
+                Discovery, North Star Metric
+              </div>
             </div>
             <div class="skill-category">
               <div class="skill-category__title">Languages</div>
-              <div class="skill-category__content">French (native), English (fluent), Japanese, German and Chinese (basic)</div>
+              <div class="skill-category__content">
+                French (native), English (fluent), Japanese, German and Chinese
+                (basic)
+              </div>
             </div>
           </div>
         </div>
@@ -116,13 +229,42 @@
           <h1 class="screen__title">Achievements</h1>
           <div class="screen__content">
             <ul class="achievements">
-              <li>+1 000 Subscriber in 6 months on my <a href="https://youtube.com/c/WawaSensei" target="_blank">YouTube Channel</a></li>
-              <li>Co-founded a low-code SaaS App Builder with +10 000 apps in production <a href="https://appdrag.com" target="_blank">appdrag.com</a></li>
-              <li>Built a SaaS for cookie consent banner <a href="https://www.eikyo.pro" target="_blank">eikyo.pro</a></li>
-              <li>Built a full Oculus Quest VR Game <a href="https://sidequestvr.com/app/1196/zombie-world-vr" target="_blank">Zombie World VR</a></li>
-              <li>Wrote more than 2 hours of cinematic music <a href="https://soundcloud.com/wassimsamad" target="_blank">available online</a></li>
-              <li>Read +20 books / year (mostly self improvement & technical books)</li>
-              <li>Swim +200kms / year</li>
+              <li>
+                +5 000 Subscribers in 2 years on my
+                <a href="https://youtube.com/c/WawaSensei" target="_blank"
+                  >YouTube Channel</a
+                >
+              </li>
+              <li>
+                Co-founded a low-code SaaS App Builder with +10 000 apps in
+                production
+                <a href="https://appdrag.com" target="_blank">appdrag.com</a>
+              </li>
+              <li>
+                Built a SaaS for cookie consent banner
+                <a href="https://www.eikyo.pro" target="_blank">eikyo.pro</a>
+              </li>
+              <li>
+                Built a full Oculus Quest VR Game
+                <a
+                  href="https://sidequestvr.com/app/1196/zombie-world-vr"
+                  target="_blank"
+                  >Zombie World VR</a
+                >
+              </li>
+              <li>
+                Spend ~2 hours / day growing my tech skills, building side
+                projects and preparing YouTube content
+              </li>
+              <li>
+                Read +20 books / year (mostly self improvement & technical
+                books)
+              </li>
+              <li>
+                Level 20 on
+                <a href="https://www.wanikani.com/" target="_blank">WaniKani</a>
+                (+2500 Kanjis)
+              </li>
             </ul>
           </div>
         </div>
@@ -133,33 +275,116 @@
             <p>Select the platform that suits you best to contact me.</p>
             <div class="contact">
               <a href="https://twitter.com/wawasensei" target="_blank">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M0 24C0 10.7452 10.7452 0 24 0C37.2548 0 48 10.7452 48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24Z" fill="#55ACEE"/>
-                  <path d="M23.2812 19.5075L23.3316 20.338L22.4922 20.2363C19.4369 19.8465 16.7677 18.5245 14.5013 16.3043L13.3934 15.2027L13.108 16.0162C12.5036 17.8297 12.8897 19.7448 14.1488 21.0328C14.8203 21.7447 14.6692 21.8464 13.5109 21.4227C13.108 21.2871 12.7554 21.1854 12.7219 21.2362C12.6044 21.3549 13.0073 22.8971 13.3262 23.5073C13.7627 24.3547 14.6524 25.1851 15.6261 25.6766L16.4487 26.0664L15.475 26.0834C14.5349 26.0834 14.5013 26.1003 14.6021 26.4562C14.9378 27.5578 16.264 28.7273 17.7413 29.2357L18.7822 29.5916L17.8756 30.1339C16.5326 30.9136 14.9546 31.3542 13.3766 31.3881C12.6211 31.4051 12 31.4728 12 31.5237C12 31.6932 14.0481 32.6423 15.24 33.0151C18.8157 34.1167 23.063 33.6422 26.2526 31.761C28.5189 30.4221 30.7852 27.7612 31.8428 25.1851C32.4136 23.8123 32.9844 21.304 32.9844 20.1007C32.9844 19.3211 33.0347 19.2194 33.9748 18.2873C34.5288 17.7449 35.0492 17.1517 35.15 16.9823C35.3178 16.6603 35.3011 16.6603 34.4449 16.9484C33.018 17.4568 32.8165 17.389 33.5216 16.6264C34.042 16.084 34.6631 15.101 34.6631 14.8129C34.6631 14.7621 34.4113 14.8468 34.1259 14.9993C33.8238 15.1688 33.1523 15.423 32.6486 15.5756L31.7421 15.8637L30.9195 15.3044C30.4663 14.9993 29.8283 14.6604 29.4926 14.5587C28.6364 14.3214 27.327 14.3553 26.5548 14.6265C24.4563 15.3892 23.1301 17.3551 23.2812 19.5075Z" fill="white"/>
+                <svg
+                  width="48"
+                  height="48"
+                  viewBox="0 0 48 48"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M0 24C0 10.7452 10.7452 0 24 0C37.2548 0 48 10.7452 48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24Z"
+                    fill="#55ACEE"
+                  />
+                  <path
+                    d="M23.2812 19.5075L23.3316 20.338L22.4922 20.2363C19.4369 19.8465 16.7677 18.5245 14.5013 16.3043L13.3934 15.2027L13.108 16.0162C12.5036 17.8297 12.8897 19.7448 14.1488 21.0328C14.8203 21.7447 14.6692 21.8464 13.5109 21.4227C13.108 21.2871 12.7554 21.1854 12.7219 21.2362C12.6044 21.3549 13.0073 22.8971 13.3262 23.5073C13.7627 24.3547 14.6524 25.1851 15.6261 25.6766L16.4487 26.0664L15.475 26.0834C14.5349 26.0834 14.5013 26.1003 14.6021 26.4562C14.9378 27.5578 16.264 28.7273 17.7413 29.2357L18.7822 29.5916L17.8756 30.1339C16.5326 30.9136 14.9546 31.3542 13.3766 31.3881C12.6211 31.4051 12 31.4728 12 31.5237C12 31.6932 14.0481 32.6423 15.24 33.0151C18.8157 34.1167 23.063 33.6422 26.2526 31.761C28.5189 30.4221 30.7852 27.7612 31.8428 25.1851C32.4136 23.8123 32.9844 21.304 32.9844 20.1007C32.9844 19.3211 33.0347 19.2194 33.9748 18.2873C34.5288 17.7449 35.0492 17.1517 35.15 16.9823C35.3178 16.6603 35.3011 16.6603 34.4449 16.9484C33.018 17.4568 32.8165 17.389 33.5216 16.6264C34.042 16.084 34.6631 15.101 34.6631 14.8129C34.6631 14.7621 34.4113 14.8468 34.1259 14.9993C33.8238 15.1688 33.1523 15.423 32.6486 15.5756L31.7421 15.8637L30.9195 15.3044C30.4663 14.9993 29.8283 14.6604 29.4926 14.5587C28.6364 14.3214 27.327 14.3553 26.5548 14.6265C24.4563 15.3892 23.1301 17.3551 23.2812 19.5075Z"
+                    fill="white"
+                  />
                 </svg>
               </a>
               <a href="https://github.com/wass08" target="_blank">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M24.0432 0.179932C10.8147 0.179932 0.0876465 11.0878 0.0876465 24.5445C0.0876465 35.3096 6.95165 44.4426 16.4699 47.6643C17.6672 47.8899 18.1067 47.1358 18.1067 46.4922C18.1067 45.9112 18.0845 43.9919 18.0742 41.956C11.4097 43.4299 10.0034 39.0812 10.0034 39.0812C8.9137 36.265 7.34358 35.5161 7.34358 35.5161C5.17009 34.0039 7.50742 34.035 7.50742 34.035C9.91297 34.2065 11.1796 36.5458 11.1796 36.5458C13.3162 40.2707 16.7837 39.1938 18.1507 38.5712C18.3657 36.9969 18.9866 35.9212 19.6716 35.3132C14.3508 34.6971 8.7574 32.6079 8.7574 23.2719C8.7574 20.6118 9.6932 18.4383 11.2256 16.732C10.9769 16.1179 10.1569 13.6402 11.4577 10.2841C11.4577 10.2841 13.4693 9.62928 18.0472 12.7816C19.9581 12.2418 22.0074 11.971 24.0432 11.9618C26.0791 11.971 28.13 12.2418 30.0444 12.7816C34.6167 9.62928 36.6256 10.2841 36.6256 10.2841C37.9295 13.6402 37.1091 16.1179 36.8604 16.732C38.3964 18.4383 39.3259 20.6118 39.3259 23.2719C39.3259 32.6301 33.7218 34.6906 28.3874 35.2938C29.2467 36.0499 30.0123 37.5327 30.0123 39.8059C30.0123 43.0655 29.9845 45.6893 29.9845 46.4922C29.9845 47.1406 30.4157 47.9003 31.63 47.6611C41.1431 44.4357 47.9984 35.3059 47.9984 24.5445C47.9984 11.0878 37.273 0.179932 24.0432 0.179932Z" fill="black"/>
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M9.16084 35.1623C9.10808 35.2837 8.92084 35.3196 8.75026 35.2365C8.57651 35.157 8.47892 34.992 8.53525 34.8706C8.58682 34.7459 8.77446 34.7116 8.94781 34.7943C9.12196 34.8742 9.22113 35.0408 9.16084 35.1623Z" fill="black"/>
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M10.1312 36.263C10.0169 36.3707 9.79356 36.3207 9.64203 36.1504C9.48533 35.9805 9.45598 35.7534 9.57181 35.644C9.68963 35.5363 9.90622 35.5867 10.0633 35.7566C10.22 35.9285 10.2506 36.154 10.1312 36.263Z" fill="black"/>
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0757 37.6662C10.9289 37.7699 10.6889 37.6727 10.5405 37.456C10.3938 37.2394 10.3938 36.9795 10.5437 36.8754C10.6925 36.7713 10.9289 36.8649 11.0793 37.08C11.2256 37.2999 11.2256 37.5601 11.0757 37.6662Z" fill="black"/>
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12.3697 39.0219C12.2384 39.1692 11.9587 39.1296 11.754 38.9287C11.5446 38.7322 11.4863 38.4534 11.618 38.3062C11.7509 38.1585 12.0321 38.2 12.2384 38.3994C12.4463 38.5954 12.5097 38.8763 12.3697 39.0219Z" fill="black"/>
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M14.1548 39.8091C14.0969 39.9999 13.8275 40.0867 13.5562 40.0056C13.2853 39.9221 13.1079 39.6985 13.1627 39.5057C13.219 39.3136 13.4896 39.2232 13.7629 39.31C14.0334 39.3931 14.2112 39.615 14.1548 39.8091Z" fill="black"/>
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M16.1153 39.9552C16.122 40.1561 15.8919 40.3227 15.6071 40.3259C15.3207 40.3328 15.089 40.1702 15.0859 39.9725C15.0859 39.7696 15.3108 39.6045 15.5972 39.5997C15.882 39.594 16.1153 39.7554 16.1153 39.9552Z" fill="black"/>
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M17.9397 39.6392C17.9738 39.8353 17.7758 40.0367 17.493 40.0899C17.2149 40.142 16.9575 40.0209 16.9222 39.8264C16.8876 39.6255 17.0892 39.4242 17.3669 39.3721C17.6501 39.3221 17.9036 39.4399 17.9397 39.6392Z" fill="black"/>
+                <svg
+                  width="48"
+                  height="48"
+                  viewBox="0 0 48 48"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M24.0432 0.179932C10.8147 0.179932 0.0876465 11.0878 0.0876465 24.5445C0.0876465 35.3096 6.95165 44.4426 16.4699 47.6643C17.6672 47.8899 18.1067 47.1358 18.1067 46.4922C18.1067 45.9112 18.0845 43.9919 18.0742 41.956C11.4097 43.4299 10.0034 39.0812 10.0034 39.0812C8.9137 36.265 7.34358 35.5161 7.34358 35.5161C5.17009 34.0039 7.50742 34.035 7.50742 34.035C9.91297 34.2065 11.1796 36.5458 11.1796 36.5458C13.3162 40.2707 16.7837 39.1938 18.1507 38.5712C18.3657 36.9969 18.9866 35.9212 19.6716 35.3132C14.3508 34.6971 8.7574 32.6079 8.7574 23.2719C8.7574 20.6118 9.6932 18.4383 11.2256 16.732C10.9769 16.1179 10.1569 13.6402 11.4577 10.2841C11.4577 10.2841 13.4693 9.62928 18.0472 12.7816C19.9581 12.2418 22.0074 11.971 24.0432 11.9618C26.0791 11.971 28.13 12.2418 30.0444 12.7816C34.6167 9.62928 36.6256 10.2841 36.6256 10.2841C37.9295 13.6402 37.1091 16.1179 36.8604 16.732C38.3964 18.4383 39.3259 20.6118 39.3259 23.2719C39.3259 32.6301 33.7218 34.6906 28.3874 35.2938C29.2467 36.0499 30.0123 37.5327 30.0123 39.8059C30.0123 43.0655 29.9845 45.6893 29.9845 46.4922C29.9845 47.1406 30.4157 47.9003 31.63 47.6611C41.1431 44.4357 47.9984 35.3059 47.9984 24.5445C47.9984 11.0878 37.273 0.179932 24.0432 0.179932Z"
+                    fill="black"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M9.16084 35.1623C9.10808 35.2837 8.92084 35.3196 8.75026 35.2365C8.57651 35.157 8.47892 34.992 8.53525 34.8706C8.58682 34.7459 8.77446 34.7116 8.94781 34.7943C9.12196 34.8742 9.22113 35.0408 9.16084 35.1623Z"
+                    fill="black"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M10.1312 36.263C10.0169 36.3707 9.79356 36.3207 9.64203 36.1504C9.48533 35.9805 9.45598 35.7534 9.57181 35.644C9.68963 35.5363 9.90622 35.5867 10.0633 35.7566C10.22 35.9285 10.2506 36.154 10.1312 36.263Z"
+                    fill="black"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M11.0757 37.6662C10.9289 37.7699 10.6889 37.6727 10.5405 37.456C10.3938 37.2394 10.3938 36.9795 10.5437 36.8754C10.6925 36.7713 10.9289 36.8649 11.0793 37.08C11.2256 37.2999 11.2256 37.5601 11.0757 37.6662Z"
+                    fill="black"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M12.3697 39.0219C12.2384 39.1692 11.9587 39.1296 11.754 38.9287C11.5446 38.7322 11.4863 38.4534 11.618 38.3062C11.7509 38.1585 12.0321 38.2 12.2384 38.3994C12.4463 38.5954 12.5097 38.8763 12.3697 39.0219Z"
+                    fill="black"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M14.1548 39.8091C14.0969 39.9999 13.8275 40.0867 13.5562 40.0056C13.2853 39.9221 13.1079 39.6985 13.1627 39.5057C13.219 39.3136 13.4896 39.2232 13.7629 39.31C14.0334 39.3931 14.2112 39.615 14.1548 39.8091Z"
+                    fill="black"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M16.1153 39.9552C16.122 40.1561 15.8919 40.3227 15.6071 40.3259C15.3207 40.3328 15.089 40.1702 15.0859 39.9725C15.0859 39.7696 15.3108 39.6045 15.5972 39.5997C15.882 39.594 16.1153 39.7554 16.1153 39.9552Z"
+                    fill="black"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M17.9397 39.6392C17.9738 39.8353 17.7758 40.0367 17.493 40.0899C17.2149 40.142 16.9575 40.0209 16.9222 39.8264C16.8876 39.6255 17.0892 39.4242 17.3669 39.3721C17.6501 39.3221 17.9036 39.4399 17.9397 39.6392Z"
+                    fill="black"
+                  />
                 </svg>
               </a>
               <a href="https://www.linkedin.com/in/wassim-samad-87903265/">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M0 24C0 10.7452 10.7452 0 24 0C37.2548 0 48 10.7452 48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24Z" fill="#0077B5"/>
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M17.3188 14.8227C17.3188 16.3918 16.1377 17.6473 14.2412 17.6473H14.2064C12.3805 17.6473 11.2 16.3918 11.2 14.8227C11.2 13.2204 12.4164 12 14.277 12C16.1377 12 17.2835 13.2204 17.3188 14.8227ZM16.9605 19.8778V36.2196H11.5216V19.8778H16.9605ZM36.5752 36.2196L36.5754 26.8497C36.5754 21.8303 33.8922 19.4941 30.3131 19.4941C27.4254 19.4941 26.1325 21.0802 25.4107 22.1929V19.8783H19.9711C20.0428 21.4117 19.9711 36.22 19.9711 36.22H25.4107V27.0934C25.4107 26.605 25.446 26.1178 25.5898 25.7681C25.9829 24.7924 26.8779 23.7822 28.3805 23.7822C30.3494 23.7822 31.1365 25.2807 31.1365 27.4767V36.2196H36.5752Z" fill="white"/>
+                <svg
+                  width="48"
+                  height="48"
+                  viewBox="0 0 48 48"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M0 24C0 10.7452 10.7452 0 24 0C37.2548 0 48 10.7452 48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24Z"
+                    fill="#0077B5"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M17.3188 14.8227C17.3188 16.3918 16.1377 17.6473 14.2412 17.6473H14.2064C12.3805 17.6473 11.2 16.3918 11.2 14.8227C11.2 13.2204 12.4164 12 14.277 12C16.1377 12 17.2835 13.2204 17.3188 14.8227ZM16.9605 19.8778V36.2196H11.5216V19.8778H16.9605ZM36.5752 36.2196L36.5754 26.8497C36.5754 21.8303 33.8922 19.4941 30.3131 19.4941C27.4254 19.4941 26.1325 21.0802 25.4107 22.1929V19.8783H19.9711C20.0428 21.4117 19.9711 36.22 19.9711 36.22H25.4107V27.0934C25.4107 26.605 25.446 26.1178 25.5898 25.7681C25.9829 24.7924 26.8779 23.7822 28.3805 23.7822C30.3494 23.7822 31.1365 25.2807 31.1365 27.4767V36.2196H36.5752Z"
+                    fill="white"
+                  />
                 </svg>
               </a>
               <a href="mailto://contact@wassimsamad.com">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M24 0C10.7452 0 0 10.7452 0 24C0 37.2548 10.7452 48 24 48C37.2548 48 48 37.2548 48 24C48 10.7452 37.2548 0 24 0ZM23.9639 26.0193L14.9987 19.5115V33.23H13.5009C12.6664 33.23 12.0031 32.5667 12.0031 31.7322V16.562C12.0031 16.4985 12.007 16.4389 12.0144 16.3831C12.0416 16.1451 12.1284 15.9122 12.2813 15.7061C12.7734 15.0428 13.7363 14.893 14.421 15.3851L23.9853 22.3391L33.6138 15.2996C34.2771 14.8074 35.2186 14.9572 35.7107 15.6419C35.9723 15.9945 36.0525 16.4256 35.9674 16.8261V31.7536C35.9674 32.5667 35.3041 33.23 34.4697 33.23H32.9719V19.4788L23.9639 26.0193Z" fill="black"/>
-                </svg>                
+                <svg
+                  width="48"
+                  height="48"
+                  viewBox="0 0 48 48"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M24 0C10.7452 0 0 10.7452 0 24C0 37.2548 10.7452 48 24 48C37.2548 48 48 37.2548 48 24C48 10.7452 37.2548 0 24 0ZM23.9639 26.0193L14.9987 19.5115V33.23H13.5009C12.6664 33.23 12.0031 32.5667 12.0031 31.7322V16.562C12.0031 16.4985 12.007 16.4389 12.0144 16.3831C12.0416 16.1451 12.1284 15.9122 12.2813 15.7061C12.7734 15.0428 13.7363 14.893 14.421 15.3851L23.9853 22.3391L33.6138 15.2996C34.2771 14.8074 35.2186 14.9572 35.7107 15.6419C35.9723 15.9945 36.0525 16.4256 35.9674 16.8261V31.7536C35.9674 32.5667 35.3041 33.23 34.4697 33.23H32.9719V19.4788L23.9639 26.0193Z"
+                    fill="black"
+                  />
+                </svg>
               </a>
             </div>
           </div>
@@ -168,8 +393,19 @@
           <div class="screen__close"></div>
           <h1 class="screen__title">About</h1>
           <div class="screen__content">
-            <p>I am a passionate Full Stack developer with +8 years of hands-on experience developing and delivering applications.</p>
-            <p>I have a great team spirit I use to help, train and lead the development team. As a lifelong learner I am continuously willing to improve and discover new things.</p>
+            <p>
+              I am a passionate Full Stack developer with +8 years of hands-on
+              experience developing and delivering applications.
+            </p>
+            <p>
+              I have a great team spirit I use to help, train and lead the tech
+              team. As a lifelong learner I am continuously willing to improve
+              and discover new things.
+            </p>
+            <p>
+              I strongly believe in web3 and decentralization. Dapps and
+              metaverse are only at their beginning.
+            </p>
           </div>
         </div>
         <div class="screen screen--activities">
@@ -177,37 +413,120 @@
           <h1 class="screen__title">Activities</h1>
           <div class="screen__content">
             <div class="activity">
-              <div class="activity__title">
-                Freelancer
-              </div>
-              <div class="activity__position">
-                Fullstack Developer
-              </div>
+              <div class="activity__title">Freelancer</div>
+              <div class="activity__position">Fullstack Developer</div>
               <div class="date activity__date">
                 <div class="date__from">2012</div>
-                <svg class="date__from-icon" viewBox="0 0 16 32" xmlns="http://www.w3.org/2000/svg">
-                  <polygon points="0 0, 16 16, 0 32" fill="black"/>
+                <svg
+                  class="date__from-icon"
+                  viewBox="0 0 16 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <polygon points="0 0, 16 16, 0 32" fill="black" />
                 </svg>
-                <svg class="date__to-icon" viewBox="0 0 16 32" xmlns="http://www.w3.org/2000/svg">
-                  <polygon points="0 0, 16 0, 16 16" fill="black"/>
-                  <polygon points="0 32, 16 32, 16 16" fill="black"/>
+                <svg
+                  class="date__to-icon"
+                  viewBox="0 0 16 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <polygon points="0 0, 16 0, 16 16" fill="black" />
+                  <polygon points="0 32, 16 32, 16 16" fill="black" />
                 </svg>
-                <svg class="date__from-icon" viewBox="0 0 16 32" xmlns="http://www.w3.org/2000/svg">
-                  <polygon points="0 0, 16 16, 0 32" fill="black"/>
+                <svg
+                  class="date__from-icon"
+                  viewBox="0 0 16 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <polygon points="0 0, 16 16, 0 32" fill="black" />
                 </svg>
-                <svg class="date__to-icon" viewBox="0 0 16 32" xmlns="http://www.w3.org/2000/svg">
-                  <polygon points="0 0, 16 0, 16 16" fill="black"/>
-                  <polygon points="0 32, 16 32, 16 16" fill="black"/>
+                <svg
+                  class="date__to-icon"
+                  viewBox="0 0 16 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <polygon points="0 0, 16 0, 16 16" fill="black" />
+                  <polygon points="0 32, 16 32, 16 16" fill="black" />
                 </svg>
-                <svg class="date__from-icon" viewBox="0 0 16 32" xmlns="http://www.w3.org/2000/svg">
-                  <polygon points="0 0, 16 16, 0 32" fill="black"/>
+                <svg
+                  class="date__from-icon"
+                  viewBox="0 0 16 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <polygon points="0 0, 16 16, 0 32" fill="black" />
                 </svg>
-                <svg class="date__to-icon" viewBox="0 0 16 32" xmlns="http://www.w3.org/2000/svg">
-                  <polygon points="0 0, 16 0, 16 16" fill="black"/>
-                  <polygon points="0 32, 16 32, 16 16" fill="black"/>
+                <svg
+                  class="date__to-icon"
+                  viewBox="0 0 16 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <polygon points="0 0, 16 0, 16 16" fill="black" />
+                  <polygon points="0 32, 16 32, 16 16" fill="black" />
                 </svg>
-                <svg class="date__from-icon" viewBox="0 0 16 32" xmlns="http://www.w3.org/2000/svg">
-                  <polygon points="0 0, 16 16, 0 32" fill="black"/>
+                <svg
+                  class="date__from-icon"
+                  viewBox="0 0 16 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <polygon points="0 0, 16 16, 0 32" fill="black" />
+                </svg>
+              </div>
+            </div>
+            <div class="activity">
+              <div class="activity__title">HappyPal</div>
+              <div class="activity__position">VP of Engineering</div>
+              <div class="date activity__date">
+                <div class="date__from">2021</div>
+                <svg
+                  class="date__from-icon"
+                  viewBox="0 0 16 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <polygon points="0 0, 16 16, 0 32" fill="black" />
+                </svg>
+                <svg
+                  class="date__to-icon"
+                  viewBox="0 0 16 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <polygon points="0 0, 16 0, 16 16" fill="black" />
+                  <polygon points="0 32, 16 32, 16 16" fill="black" />
+                </svg>
+                <svg
+                  class="date__from-icon"
+                  viewBox="0 0 16 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <polygon points="0 0, 16 16, 0 32" fill="black" />
+                </svg>
+                <svg
+                  class="date__to-icon"
+                  viewBox="0 0 16 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <polygon points="0 0, 16 0, 16 16" fill="black" />
+                  <polygon points="0 32, 16 32, 16 16" fill="black" />
+                </svg>
+                <svg
+                  class="date__from-icon"
+                  viewBox="0 0 16 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <polygon points="0 0, 16 16, 0 32" fill="black" />
+                </svg>
+                <svg
+                  class="date__to-icon"
+                  viewBox="0 0 16 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <polygon points="0 0, 16 0, 16 16" fill="black" />
+                  <polygon points="0 32, 16 32, 16 16" fill="black" />
+                </svg>
+                <svg
+                  class="date__from-icon"
+                  viewBox="0 0 16 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <polygon points="0 0, 16 16, 0 32" fill="black" />
                 </svg>
               </div>
             </div>
@@ -220,12 +539,20 @@
               </div>
               <div class="date activity__date">
                 <div class="date__from">2018</div>
-                <svg class="date__from-icon" viewBox="0 0 16 32" xmlns="http://www.w3.org/2000/svg">
-                  <polygon points="0 0, 16 16, 0 32" fill="black"/>
+                <svg
+                  class="date__from-icon"
+                  viewBox="0 0 16 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <polygon points="0 0, 16 16, 0 32" fill="black" />
                 </svg>
-                <svg class="date__to-icon" viewBox="0 0 16 32" xmlns="http://www.w3.org/2000/svg">
-                  <polygon points="0 0, 16 0, 16 16" fill="black"/>
-                  <polygon points="0 32, 16 32, 16 16" fill="black"/>
+                <svg
+                  class="date__to-icon"
+                  viewBox="0 0 16 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <polygon points="0 0, 16 0, 16 16" fill="black" />
+                  <polygon points="0 32, 16 32, 16 16" fill="black" />
                 </svg>
                 <div class="date__to">2021</div>
               </div>
@@ -239,12 +566,20 @@
               </div>
               <div class="date activity__date">
                 <div class="date__from">2016</div>
-                <svg class="date__from-icon" viewBox="0 0 16 32" xmlns="http://www.w3.org/2000/svg">
-                  <polygon points="0 0, 16 16, 0 32" fill="black"/>
+                <svg
+                  class="date__from-icon"
+                  viewBox="0 0 16 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <polygon points="0 0, 16 16, 0 32" fill="black" />
                 </svg>
-                <svg class="date__to-icon" viewBox="0 0 16 32" xmlns="http://www.w3.org/2000/svg">
-                  <polygon points="0 0, 16 0, 16 16" fill="black"/>
-                  <polygon points="0 32, 16 32, 16 16" fill="black"/>
+                <svg
+                  class="date__to-icon"
+                  viewBox="0 0 16 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <polygon points="0 0, 16 0, 16 16" fill="black" />
+                  <polygon points="0 32, 16 32, 16 16" fill="black" />
                 </svg>
                 <div class="date__to">2021</div>
               </div>
@@ -253,36 +588,46 @@
               <div class="activity__title">
                 Mon agence Mobile, Paris, France
               </div>
-              <div class="activity__position">
-                Full Stack Developer                
-              </div>
+              <div class="activity__position">Full Stack Developer</div>
               <div class="date activity__date">
                 <div class="date__from">2014</div>
-                <svg class="date__from-icon" viewBox="0 0 16 32" xmlns="http://www.w3.org/2000/svg">
-                  <polygon points="0 0, 16 16, 0 32" fill="black"/>
+                <svg
+                  class="date__from-icon"
+                  viewBox="0 0 16 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <polygon points="0 0, 16 16, 0 32" fill="black" />
                 </svg>
-                <svg class="date__to-icon" viewBox="0 0 16 32" xmlns="http://www.w3.org/2000/svg">
-                  <polygon points="0 0, 16 0, 16 16" fill="black"/>
-                  <polygon points="0 32, 16 32, 16 16" fill="black"/>
+                <svg
+                  class="date__to-icon"
+                  viewBox="0 0 16 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <polygon points="0 0, 16 0, 16 16" fill="black" />
+                  <polygon points="0 32, 16 32, 16 16" fill="black" />
                 </svg>
                 <div class="date__to">2015</div>
               </div>
             </div>
             <div class="activity">
-              <div class="activity__title">
-                Epitech
-              </div>
-              <div class="activity__position">
-                Pedagogic Assistant         
-              </div>
+              <div class="activity__title">Epitech</div>
+              <div class="activity__position">Pedagogic Assistant</div>
               <div class="date activity__date">
                 <div class="date__from">2012</div>
-                <svg class="date__from-icon" viewBox="0 0 16 32" xmlns="http://www.w3.org/2000/svg">
-                  <polygon points="0 0, 16 16, 0 32" fill="black"/>
+                <svg
+                  class="date__from-icon"
+                  viewBox="0 0 16 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <polygon points="0 0, 16 16, 0 32" fill="black" />
                 </svg>
-                <svg class="date__to-icon" viewBox="0 0 16 32" xmlns="http://www.w3.org/2000/svg">
-                  <polygon points="0 0, 16 0, 16 16" fill="black"/>
-                  <polygon points="0 32, 16 32, 16 16" fill="black"/>
+                <svg
+                  class="date__to-icon"
+                  viewBox="0 0 16 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <polygon points="0 0, 16 0, 16 16" fill="black" />
+                  <polygon points="0 32, 16 32, 16 16" fill="black" />
                 </svg>
                 <div class="date__to">2013</div>
               </div>
@@ -311,5 +656,5 @@
         </div>
       </div>
     </div>
-</body>
+  </body>
 </html>
